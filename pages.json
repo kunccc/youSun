@@ -1,10 +1,16 @@
 {
 	"pages": [{
-		"path": "pages/intro/intro"
-	}, {
 		"path": "pages/mall/mall"
 	}, {
+		"path": "pages/intro/intro"
+	}, {
 		"path": "pages/me/me"
+	}, {
+		"path": "pages/mall/components/liveBroadcast"
+	}, {
+		"path": "pages/mall/components/service"
+	}, {
+		"path": "pages/mall/components/sunYuan"
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",

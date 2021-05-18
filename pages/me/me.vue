@@ -19,21 +19,24 @@
 			<view class="order">
 				<view class="header">
 					我的订单
-					<navigator url="./components/detail">查看全部<image src="../../static/right.png"></image></navigator>
+					<view @click="jump('1')">
+						查看全部
+						<image src="../../static/right.png"></image>
+					</view>
 				</view>
-				<view class="wrapper">
+				<view class="wrapper" @click="jump('2')">
 					<view><image src="../../static/deliver.png" /></view>
 					待发货
 				</view>
-				<view class="wrapper">
+				<view class="wrapper" @click="jump('3')">
 					<view><image src="../../static/receive.png" /></view>
 					待收货
 				</view>
-				<view class="wrapper">
+				<view class="wrapper" @click="jump('4')">
 					<view><image src="../../static/comment.png" /></view>
 					待评价
 				</view>
-				<view class="wrapper">
+				<view class="wrapper" @click="jump('5')">
 					<view><image src="../../static/afterSales.png" /></view>
 					售后
 				</view>
@@ -55,7 +58,13 @@ export default {
 	data() {
 		return {}
 	},
-	methods: {}
+	methods: {
+		jump(value) {
+			uni.navigateTo({
+				url: `./components/detail?page=${value}`
+			})
+		}
+	}
 }
 </script>
 
@@ -103,10 +112,10 @@ export default {
 				display: flex;
 				justify-content: space-between;
 				margin-bottom: 30rpx;
-				navigator {
+				> view {
 					display: flex;
 					align-items: center;
-					image{
+					image {
 						width: 30rpx;
 						height: 30rpx;
 					}

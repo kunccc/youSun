@@ -1,12 +1,12 @@
 <template>
 	<view class="detail">
 		<view class="header">
-			<view>全部</view>
-			<view>待发货</view>
-			<view>待收货</view>
-			<view>待评价</view>
-			<view>售后</view>
-			<view class="indicator" />
+			<view @click="jump('1')">全部</view>
+			<view @click="jump('2')">待发货</view>
+			<view @click="jump('3')">待收货</view>
+			<view @click="jump('4')">待评价</view>
+			<view @click="jump('5')">售后</view>
+			<view class="indicator" :class="'page' + page" />
 		</view>
 		<view class="item">
 			<view class="main">
@@ -62,7 +62,24 @@
 	</view>
 </template>
 
-<script></script>
+<script>
+export default {
+	data() {
+		return {
+			page: '1'
+		}
+	},
+	methods: {
+		jump(value) {
+			this.page = value
+		}
+	},
+	created() {
+		const routes = getCurrentPages()
+		this.page = routes[routes.length - 1].options.page
+	}
+}
+</script>
 
 <style lang="scss" scoped>
 .detail {
@@ -79,10 +96,29 @@
 		.indicator {
 			background: #1bbb5a;
 			position: absolute;
-			bottom: 30rpx;
-			left: 28rpx;
-			width: 80rpx;
+			bottom: 34rpx;
 			height: 5rpx;
+			transition: all 0.3s;
+			&.page1 {
+				width: 60rpx;
+				left: 39rpx;
+			}
+			&.page2 {
+				width: 90rpx;
+				left: 170rpx;
+			}
+			&.page3 {
+				width: 90rpx;
+				left: 330rpx;
+			}
+			&.page4 {
+				width: 90rpx;
+				left: 492rpx;
+			}
+			&.page5 {
+				width: 60rpx;
+				left: 655rpx;
+			}
 		}
 	}
 	.item {

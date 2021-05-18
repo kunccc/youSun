@@ -12,5 +12,6 @@
 <style lang="scss">
 page{
 	color: #333;
+	font-size: 14px;
 }
 </style>

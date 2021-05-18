@@ -11,6 +11,8 @@
 		"path": "pages/mall/components/service"
 	}, {
 		"path": "pages/mall/components/sunYuan"
+	}, {
+		"path": "pages/me/components/detail"
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",

@@ -43,7 +43,7 @@ export default {
 	}
 	.commodity{
 		margin-top: 40rpx;
-		background: #f5f5f5;
+		background: #f2f2f2;
 		border-top-left-radius: 50rpx;
 		border-top-right-radius: 50rpx;
 		min-height: 100vh;

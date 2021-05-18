@@ -3,12 +3,12 @@
 		<view class="info">
 			<view class="head"></view>
 			<view class="collection">
-				<view class="wrapper">
+				<view class="wrapper" @click="go('collection')">
 					11
 					<br />
 					商品收藏
 				</view>
-				<view class="wrapper">
+				<view class="wrapper" @click="go('history')">
 					34
 					<br />
 					浏览记录
@@ -42,12 +42,12 @@
 				</view>
 			</view>
 			<view class="tools">
-				<view>
+				<view @click="go('coupon')">
 					优惠券
 					<text>0</text>
 				</view>
-				<view>收货地址</view>
-				<view>联系客服</view>
+				<view @click="go('address')">收货地址</view>
+				<view @click="go('contact')">联系客服</view>
 			</view>
 		</view>
 	</view>
@@ -62,6 +62,11 @@ export default {
 		jump(value) {
 			uni.navigateTo({
 				url: `./components/detail?page=${value}`
+			})
+		},
+		go(value){
+			uni.navigateTo({
+				url: `./components/${value}`
 			})
 		}
 	}

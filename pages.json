@@ -12,7 +12,19 @@
 	}, {
 		"path": "pages/mall/components/sunYuan"
 	}, {
+		"path": "pages/mall/components/goodDetail"
+	}, {
 		"path": "pages/me/components/detail"
+	}, {
+		"path": "pages/me/components/collection"
+	}, {
+		"path": "pages/me/components/history"
+	}, {
+		"path": "pages/me/components/address"
+	}, {
+		"path": "pages/me/components/contact"
+	}, {
+		"path": "pages/me/components/coupon"
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",

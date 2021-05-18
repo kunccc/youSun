@@ -3,7 +3,7 @@
 		<view>共享村庄</view>
 		<view>共享竹林</view>
 		<movable-area>
-			<movable-item direction="all"><view></view></movable-item>
+			<movable-item direction="all"><view>11</view></movable-item>
 		</movable-area>
 	</view>
 </template>

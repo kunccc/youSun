@@ -10,4 +10,7 @@
 </script>
 
 <style>
+page{
+	color: #666;
+}
 </style>

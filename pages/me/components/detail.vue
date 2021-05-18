@@ -2,7 +2,7 @@
 	<view class="detail">
 		<view class="header">
 			<view>全部</view>
-			<view>代发货</view>
+			<view>待发货</view>
 			<view>待收货</view>
 			<view>待评价</view>
 			<view>售后</view>
@@ -11,9 +11,11 @@
 		<view class="item">
 			<view class="main">
 				<view class="img"></view>
-				<view>
-					待发货 | 删除
-					<br />
+				<view class="info">
+					<view>
+						待收货 |
+						<image src="../../../static/remove.png" />
+					</view>
 					￥4999.00 x1
 				</view>
 			</view>
@@ -26,9 +28,11 @@
 		<view class="item">
 			<view class="main">
 				<view class="img"></view>
-				<view>
-					待收货 | 删除
-					<br />
+				<view class="info">
+					<view>
+						待收货 |
+						<image src="../../../static/remove.png" />
+					</view>
 					￥289.00 x1
 				</view>
 			</view>
@@ -41,9 +45,11 @@
 		<view class="item">
 			<view class="main">
 				<view class="img"></view>
-				<view>
-					待评价 | 删除
-					<br />
+				<view class="info">
+					<view>
+						待收货 |
+						<image src="../../../static/remove.png" />
+					</view>
 					￥799.00 x1
 				</view>
 			</view>
@@ -89,23 +95,35 @@
 		.main {
 			display: flex;
 			justify-content: space-between;
-			.img{
+			.img {
 				width: 200rpx;
 				height: 200rpx;
-				border: 1px solid #1BBB5A;
+				border: 1px solid #1bbb5a;
+			}
+			.info {
+				> view {
+					display: flex;
+					justify-content: flex-end;
+					align-items: center;
+					image {
+						width: 34rpx;
+						height: 34rpx;
+						margin-left: 4rpx;
+					}
+				}
 			}
 		}
-		.footer{
+		.footer {
 			margin-top: 50rpx;
 			display: flex;
 			justify-content: space-between;
-			view{
+			view {
 				border: 1px solid #777;
 				padding: 10rpx 30rpx;
 				border-radius: 100rpx;
-				&:last-child{
+				&:last-child {
 					border: none;
-					background: #1BBB5A;
+					background: #1bbb5a;
 					color: #fff;
 				}
 			}

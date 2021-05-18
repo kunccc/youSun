@@ -9,8 +9,8 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 page{
-	color: #666;
+	color: #333;
 }
 </style>

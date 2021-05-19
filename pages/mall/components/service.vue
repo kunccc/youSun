@@ -3,7 +3,7 @@
 		<view>共享村庄</view>
 		<view>共享竹林</view>
 		<movable-area>
-			<movable-item direction="all"><view>11</view></movable-item>
+			<movable-view direction="all"><view><image src="../../../static/consult.png" /></view></movable-view>
 		</movable-area>
 	</view>
 </template>
@@ -13,21 +13,20 @@
 <style lang="scss" scoped>
 .service {
 	movable-area {
-		width: 750rpx;
+		width: 666rpx;
 		height: 100vh;
-		border: 1px solid blue;
-		movable-view{
-			width: 100rpx;
-			height: 100rpx;
-		}
 		view {
 			width: 100rpx;
 			height: 100rpx;
-			border: 1px solid red;
-			box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25);
+			border-radius: 50%;
+			background: #1BBB5A;
+			box-shadow: 0 0 1px 2px rgba(27,187,90, 0.25);
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			image{
-				width: 100rpx;
-				height: 100rpx;
+				width: 66rpx;
+				height: 66rpx;
 			}
 		}
 	}

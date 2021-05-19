@@ -1,7 +1,10 @@
 <template>
 	<view class="me">
 		<view class="info">
-			<view class="head"></view>
+			<view class="head">
+				<view class="img" />
+				未登录
+			</view>
 			<view class="collection">
 				<view class="wrapper" @click="go('collection')">
 					11
@@ -83,11 +86,18 @@ export default {
 		align-items: center;
 		padding-bottom: 20rpx;
 		.head {
-			background: #fff;
-			width: 160rpx;
-			height: 160rpx;
-			border-radius: 100%;
-			margin: 40rpx;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			color: #fff;
+			margin: 40rpx 0;
+			.img{
+				background: #fff;
+				width: 160rpx;
+				height: 160rpx;
+				border-radius: 100%;
+				margin-bottom: 20rpx;
+			}
 		}
 		.collection {
 			display: flex;

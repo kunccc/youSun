@@ -9,19 +9,19 @@
 			<text>热销商品</text>
 			<view class="wrapper">
 				<view class="img" />
-				<text class="title">笋片</text><br/>
+				<text class="title">绿色笋干</text><br/>
 				<text class="price">￥39</text><br/>
 				<text>12已售</text>
 			</view>
 			<view class="wrapper">
 				<view class="img" />
-				<text class="title">笋片</text><br/>
+				<text class="title">泡椒笋尖</text><br/>
 				<text class="price">￥39</text><br/>
 				<text>12已售</text>
 			</view>
 			<view class="wrapper">
 				<view class="img" />
-				<text class="title">笋片</text><br/>
+				<text class="title">酸笋</text><br/>
 				<text class="price">￥39</text><br/>
 				<text>12已售</text>
 			</view>

@@ -3,7 +3,7 @@
 		<view>共享村庄</view>
 		<view>共享竹林</view>
 		<movable-area>
-			<movable-view direction="all"><view><image src="../../../static/consult.png" /></view></movable-view>
+			<movable-view direction="all" x="750rpx" y="750rpx"><view><image src="../../../static/consult.png" /></view></movable-view>
 		</movable-area>
 	</view>
 </template>

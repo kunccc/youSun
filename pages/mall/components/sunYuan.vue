@@ -5,10 +5,10 @@
 			<input placeholder="搜索商品" disabled />
 		</view>
 		<view class="commodity">
-			<view class="sort" :class="'sort'+sort">
-				<text>分类</text>
-				<text @click="go(1)">笋食</text>
-				<text @click="go(2)">文创</text>
+			<view class="sort">
+				<text @click="go(1)" :class="{'selected': sort === 1}">热门</text>
+				<text @click="go(2)" :class="{'selected': sort === 2}">笋食</text>
+				<text @click="go(3)" :class="{'selected': sort === 3}">文创</text>
 			</view>
 			<view class="show">
 				<view class="detail"><view class="img"/><view class="info"><text>绿色笋干</text><text>￥39</text></view></view>
@@ -67,30 +67,11 @@ export default {
 			width: 200rpx;
 			text{
 				margin-top: 10rpx;
-				&:first-child{
-					font-size: 18px;
-					font-weight: bold;
-					margin-bottom: 20rpx;
-				}
-			}
-			&::before{
-				content: '';
-				width: 4rpx;
-				height: 24rpx;
-				position: absolute;
-				top: 0;
-				left: -10rpx;
-				background: #1BBB5A;
-				transition: all 250ms;
-			}
-			&.sort1{
-				&::before{
-					top: 95rpx;
-				}
-			}
-			&.sort2{
-				&::before{
-					top: 148rpx;
+				font-size: 16px;
+				margin: 10rpx 0;
+				transition: all .3s;
+				&.selected{
+					color: #1BBB5A;
 				}
 			}
 		}

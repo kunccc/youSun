@@ -74,7 +74,7 @@ export default {
 			this.page = value
 		}
 	},
-	created() {
+	onShow() {
 		const routes = getCurrentPages()
 		this.page = routes[routes.length - 1].options.page
 	}

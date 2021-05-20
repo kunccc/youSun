@@ -1,11 +1,11 @@
 <template>
 	<view class="detail">
 		<view class="header">
-			<view @click="jump('1')">全部</view>
-			<view @click="jump('2')">待发货</view>
-			<view @click="jump('3')">待收货</view>
-			<view @click="jump('4')">待评价</view>
-			<view @click="jump('5')">售后</view>
+			<view @click="jump('1')" :class="{'selected': page === '1'}">全部</view>
+			<view @click="jump('2')" :class="{'selected': page === '2'}">待发货</view>
+			<view @click="jump('3')" :class="{'selected': page === '3'}">待收货</view>
+			<view @click="jump('4')" :class="{'selected': page === '4'}">待评价</view>
+			<view @click="jump('5')" :class="{'selected': page === '5'}">售后</view>
 			<view class="indicator" :class="'page' + page" />
 		</view>
 		<view class="item">
@@ -93,12 +93,17 @@ export default {
 		display: flex;
 		justify-content: space-around;
 		position: relative;
+		>view{
+			transition: all 0.3s;
+		}
+		.selected{
+			color: #1BBB5A;
+		}
 		.indicator {
 			background: #1bbb5a;
 			position: absolute;
 			bottom: 34rpx;
 			height: 5rpx;
-			transition: all 0.3s;
 			&.page1 {
 				width: 60rpx;
 				left: 39rpx;

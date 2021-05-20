@@ -9,77 +9,17 @@
 			<view class="indicator" :class="'page' + page" />
 		</view>
 		<view class="itemWrapper">
-			<view class="item">
+			<view class="item" v-for="(item, index) in data" :key="index">
 				<view class="main">
 					<view class="img"></view>
 					<view class="info">
 						<view class="status">
-							待发货 丨
-							<image src="../../../static/remove.png" />
+							{{ item.status }} 丨
+							<image src="../../../static/remove.png" @click="remove(item.id)" />
 						</view>
 						<view class="wrapper">
-							<text class="price">￥4999</text>
-							<text class="count">x1</text>
-						</view>
-					</view>
-				</view>
-				<view class="footer">
-					<view>评价服务</view>
-					<view>查看物流</view>
-					<view>再次购买</view>
-				</view>
-			</view>
-			<view class="item">
-				<view class="main">
-					<view class="img"></view>
-					<view class="info">
-						<view class="status">
-							待收货 丨
-							<image src="../../../static/remove.png" />
-						</view>
-						<view class="wrapper">
-							<text class="price">￥289</text>
-							<text class="count">x1</text>
-						</view>
-					</view>
-				</view>
-				<view class="footer">
-					<view>评价服务</view>
-					<view>查看物流</view>
-					<view>再次购买</view>
-				</view>
-			</view>
-			<view class="item">
-				<view class="main">
-					<view class="img"></view>
-					<view class="info">
-						<view class="status">
-							待评价 丨
-							<image src="../../../static/remove.png" />
-						</view>
-						<view class="wrapper">
-							<text class="price">￥799</text>
-							<text class="count">x1</text>
-						</view>
-					</view>
-				</view>
-				<view class="footer">
-					<view>评价服务</view>
-					<view>查看物流</view>
-					<view>再次购买</view>
-				</view>
-			</view>
-			<view class="item">
-				<view class="main">
-					<view class="img"></view>
-					<view class="info">
-						<view class="status">
-							已完成 丨
-							<image src="../../../static/remove.png" />
-						</view>
-						<view class="wrapper">
-							<text class="price">￥299</text>
-							<text class="count">x1</text>
+							<text class="price">￥{{ item.price }}</text>
+							<text class="count">x{{ item.count }}</text>
 						</view>
 					</view>
 				</view>
@@ -97,12 +37,39 @@
 export default {
 	data() {
 		return {
-			page: '1'
+			page: '1',
+			// 虚假的源数据 应从vuex拿
+			dataSource: [
+				{ id: 1, status: '待发货', price: '4999', count: '1' },
+				{ id: 2, status: '待收货', price: '289', count: '3' },
+				{ id: 3, status: '待评价', price: '799', count: '1' },
+				{ id: 4, status: '已完成', price: '299', count: '2' }
+			],
+			map: {
+				2: '待发货',
+				3: '待收货',
+				4: '待评价',
+				5: '已完成'
+			}
 		}
 	},
 	methods: {
 		jump(value) {
 			this.page = value
+		},
+		remove(id){
+			uni.showModal({
+				content: '确认删除此订单？',
+				success: res => {
+					if (res.confirm) this.dataSource = this.dataSource.filter(item => item.id !== id)
+				}
+			})
+		}
+	},
+	computed: {
+		data: function() {
+			if (this.page === '1') return this.dataSource
+			return this.dataSource.filter(item => item.status === this.map[this.page])
 		}
 	},
 	onShow() {

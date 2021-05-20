@@ -2,8 +2,9 @@
 	<view class="me">
 		<view class="info">
 			<view class="head">
-				<view class="img" />
-				未登录
+				<view @click="login" class="img"><image :src="avatarUrl || '../../static/noLogin.png'" :class="{ isLoginIn: nickName }"></image></view>
+				<text v-if="!nickName" @click="login">未登录</text>
+				<text v-else>{{ nickName }}</text>
 			</view>
 			<view class="collection">
 				<view class="wrapper" @click="go('collection')">
@@ -59,7 +60,20 @@
 <script>
 export default {
 	data() {
-		return {}
+		return {
+			nickName: '',
+			avatarUrl: ''
+		}
+	},
+	onShow() {
+		uni.getStorage({
+			key: 'nickName',
+			success: res => (this.nickName = res.data)
+		})
+		uni.getStorage({
+			key: 'avatarUrl',
+			success: res => (this.avatarUrl = res.data)
+		})
 	},
 	methods: {
 		jump(value) {
@@ -67,10 +81,32 @@ export default {
 				url: `./components/detail?page=${value}`
 			})
 		},
-		go(value){
+		go(value) {
 			uni.navigateTo({
 				url: `./components/${value}`
 			})
+		},
+		getInfo() {
+			return new Promise((resolve, reject) => {
+				uni.getUserProfile({
+					desc: '登录',
+					success: res => resolve(JSON.parse(res.rawData)),
+					fail: err => reject(err)
+				})
+			})
+		},
+		login() {
+			if(this.nickName) return
+			this.getInfo()
+				.then(res => {
+					this.nickName = res.nickName
+					this.avatarUrl = res.avatarUrl
+				})
+				.catch(err => console.log(err))
+				.then(() => {
+					uni.setStorageSync('nickName', this.nickName)
+					uni.setStorageSync('avatarUrl', this.avatarUrl)
+				})
 		}
 	}
 }
@@ -91,12 +127,24 @@ export default {
 			align-items: center;
 			color: #fff;
 			margin: 40rpx 0;
-			.img{
+			.img {
 				background: #fff;
 				width: 160rpx;
 				height: 160rpx;
 				border-radius: 100%;
 				margin-bottom: 20rpx;
+				overflow: hidden;
+				text-align: center;
+				image {
+					margin-top: 26rpx;
+					width: 130rpx;
+					height: 130rpx;
+					&.isLoginIn {
+						margin-top: 0;
+						width: 160rpx;
+						height: 160rpx;
+					}
+				}
 			}
 		}
 		.collection {

@@ -9,6 +9,10 @@
 			<view class="indicator" :class="'page' + page" />
 		</view>
 		<view class="itemWrapper">
+			<view class="noOrder" v-if="data.length === 0">
+				<image src="../../../static/noOrder.png" />
+				暂无相关订单
+			</view>
 			<view class="item" v-for="(item, index) in data" :key="index">
 				<view class="main">
 					<view class="img"></view>
@@ -24,8 +28,7 @@
 					</view>
 				</view>
 				<view class="footer">
-					<view>评价服务</view>
-					<view>查看物流</view>
+					<view @click="go('transform')">查看物流</view>
 					<view>再次购买</view>
 				</view>
 			</view>
@@ -56,6 +59,11 @@ export default {
 	methods: {
 		jump(value) {
 			this.page = value
+		},
+		go(value){
+			uni.navigateTo({
+				url: `./${value}`
+			})
 		},
 		remove(id){
 			uni.showModal({
@@ -128,6 +136,19 @@ export default {
 		}
 	}
 	.itemWrapper {
+		.noOrder{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin-top: 180rpx;
+			color: #aaa;
+			image{
+				width: 200rpx;
+				height: 200rpx;
+				margin-bottom: 30rpx;
+			}
+		}
 		.item {
 			background: #fff;
 			border-radius: 30rpx;
@@ -178,11 +199,13 @@ export default {
 			.footer {
 				margin-top: 50rpx;
 				display: flex;
-				justify-content: space-between;
+				justify-content: flex-end;
 				view {
 					border: 1px solid #999;
-					padding: 8rpx 30rpx;
+					padding: 6rpx 26rpx;
 					border-radius: 100rpx;
+					margin-left: 30rpx;
+					font-size: 12px;
 					&:last-child {
 						border: none;
 						background: #1bbb5a;

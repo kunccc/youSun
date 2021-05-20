@@ -34,6 +34,11 @@
 		"path": "pages/me/components/contact"
 	}, {
 		"path": "pages/me/components/coupon"
+	}, {
+		"path": "pages/me/components/transform",
+		"style":{
+			"navigationBarTitleText": "查看物流"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",

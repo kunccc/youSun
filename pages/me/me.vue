@@ -8,14 +8,14 @@
 			</view>
 			<view class="collection">
 				<view class="wrapper" @click="go('collection')">
-					11
+					2
 					<br />
-					商品收藏
+					我的收藏
 				</view>
 				<view class="wrapper" @click="go('history')">
-					34
+					3
 					<br />
-					浏览记录
+					我的足迹
 				</view>
 			</view>
 		</view>
@@ -115,7 +115,6 @@ export default {
 <style lang="scss" scoped>
 .me {
 	background: #1bbb5a;
-	min-height: 100vh;
 	.info {
 		display: flex;
 		flex-direction: column;

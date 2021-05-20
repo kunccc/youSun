@@ -33,7 +33,6 @@
 <style lang="scss" scoped>
 .collection{
 	background: #f2f2f2;
-	min-height: 100vh;
 	padding: 1rpx 0;
 	.info{
 		background: #fff;

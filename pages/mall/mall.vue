@@ -37,7 +37,6 @@
 	display: flex;
 	flex-direction: column;
 	background: #f2f2f2;
-	min-height: 100vh;
 	.nav {
 		display: flex;
 		justify-content: space-around;

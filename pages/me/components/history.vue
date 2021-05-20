@@ -25,7 +25,6 @@
 
 <style lang="scss" scoped>
 .history {
-	min-height: 100vh;
 	padding: 0 20rpx;
 	.wrapper {
 		margin-top: 30rpx;
@@ -40,7 +39,7 @@
 			.img {
 				width: 200rpx;
 				height: 200rpx;
-				border: 1px solid blue;
+				border: 1px solid #1BBB5A;
 				margin: 20rpx 0 10rpx;
 				border-radius: 20rpx;
 			}

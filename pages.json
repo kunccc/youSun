@@ -14,14 +14,20 @@
 	}, {
 		"path": "pages/mall/components/goodDetail"
 	}, {
-		"path": "pages/me/components/detail"
+		"path": "pages/me/components/detail",
+		"style":{
+			"navigationBarTitleText": "我的订单"
+		}
 	}, {
 		"path": "pages/me/components/collection",
 		"style":{
 			"navigationBarTitleText": "我的收藏"
 		}
 	}, {
-		"path": "pages/me/components/history"
+		"path": "pages/me/components/history",
+		"style":{
+			"navigationBarTitleText": "我的足迹"
+		}
 	}, {
 		"path": "pages/me/components/address"
 	}, {

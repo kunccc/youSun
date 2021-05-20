@@ -37,7 +37,6 @@ export default {
 <style lang="scss" scoped>
 .sunYuan{
 	background: #1BBB5A;
-	min-height: 100vh;
 	.search{
 		display: flex;
 		justify-content: center;

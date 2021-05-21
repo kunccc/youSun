@@ -96,17 +96,26 @@ export default {
 			})
 		},
 		login() {
-			if(this.nickName) return
+			if (this.nickName) return
 			this.getInfo()
 				.then(res => {
-					this.nickName = res.nickName
-					this.avatarUrl = res.avatarUrl
+					uni.showLoading({
+						title: '登录中',
+						mask: true
+					})
+					uni.setStorageSync('nickName', res.nickName)
+					uni.setStorageSync('avatarUrl', res.avatarUrl)
+					setTimeout(() => {
+						this.nickName = res.nickName
+						this.avatarUrl = res.avatarUrl
+						uni.hideLoading()
+						uni.showToast({
+							title: '登录成功',
+							duration: 1500
+						})
+					}, 1500)
 				})
 				.catch(err => console.log(err))
-				.then(() => {
-					uni.setStorageSync('nickName', this.nickName)
-					uni.setStorageSync('avatarUrl', this.avatarUrl)
-				})
 		}
 	}
 }

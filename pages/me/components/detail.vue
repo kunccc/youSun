@@ -14,6 +14,7 @@
 				暂无相关订单
 			</view>
 			<view class="item" v-for="(item, index) in data" :key="index">
+				<view @click="go('goodDetail')" class="triggerArea" />
 				<view class="main">
 					<view class="img"></view>
 					<view class="info">
@@ -61,6 +62,12 @@ export default {
 			this.page = value
 		},
 		go(value){
+			if(value === 'goodDetail'){
+				uni.navigateTo({
+					url: `../../mall/components/${value}`
+				})
+				return
+			}
 			uni.navigateTo({
 				url: `./${value}`
 			})
@@ -149,6 +156,7 @@ export default {
 				margin-bottom: 30rpx;
 			}
 		}
+
 		.item {
 			background: #fff;
 			border-radius: 30rpx;
@@ -156,8 +164,16 @@ export default {
 			padding: 40rpx;
 			display: flex;
 			flex-direction: column;
+			position: relative;
 			&:first-child {
 				margin-top: 120rpx;
+			}
+			.triggerArea{
+				position: absolute;
+				width: 660rpx;
+				height: 280rpx;
+				top: 0;
+				left: 0;
 			}
 			.main {
 				display: flex;

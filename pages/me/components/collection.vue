@@ -1,6 +1,6 @@
 <template>
 	<view class="collection">
-		<view class="info">
+		<view class="info" @click="go('goodDetail')">
 			<view class="img" />
 			<view class="detail">
 				酸笋
@@ -12,7 +12,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="info">
+		<view class="info" @click="go('goodDetail')">
 			<view class="img" />
 			<view class="detail">
 				绿色笋干
@@ -28,6 +28,15 @@
 </template>
 
 <script>
+export default {
+	methods:{
+		go(value){
+			uni.navigateTo({
+				url: `../../mall/components/goodDetail`
+			})
+		}
+	}
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 <template>
 	<view class="sunYuan">
 		<view class="search">
-			<image src="../../../static/search.png" />
+			<image src="../../static/search.png" />
 			<input placeholder="搜索商品" disabled />
 		</view>
 		<view class="commodity">

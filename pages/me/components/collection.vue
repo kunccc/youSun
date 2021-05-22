@@ -1,27 +1,14 @@
 <template>
 	<view class="collection">
-		<view class="info" @click="go('goodDetail')">
-			<view class="img" />
-			<view class="detail">
-				酸笋
-				<view class="wrapper">
-					￥39
-					<view class="icon">
-						<image src="../../../static/cart.png"></image>
-					</view>
-				</view>
-			</view>
+		<view v-if="dataSource.length === 0" class="noCollection">
+			<image src="../../../static/cancelCollection.png" />
+			暂无收藏
 		</view>
-		<view class="info" @click="go('goodDetail')">
+		<view @longpress="deleteItem(index)" v-for="(item, index) in dataSource" :key="index" class="info" @click="go('goodDetail')">
 			<view class="img" />
 			<view class="detail">
-				绿色笋干
-				<view class="wrapper">
-					￥59
-					<view class="icon">
-						<image src="../../../static/cart.png"></image>
-					</view>
-				</view>
+				{{ item.name }}
+				<text>￥{{ item.price }}</text>
 			</view>
 		</view>
 	</view>
@@ -29,10 +16,21 @@
 
 <script>
 export default {
-	methods:{
-		go(value){
+	data() {
+		return {
+			dataSource: [{ name: '酸笋', price: '39' }, { name: '绿色笋干', price: '59' }, { name: '泡椒笋尖', price: '29' }]
+		}
+	},
+	methods: {
+		go(value) {
 			uni.navigateTo({
-				url: `../../mall/components/goodDetail`
+				url: `../../components/goodDetail`
+			})
+		},
+		deleteItem(index) {
+			uni.showActionSheet({
+				itemList: ['取消收藏'],
+				success: () => this.dataSource.splice(index, 1)
 			})
 		}
 	}
@@ -40,47 +38,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.collection{
+.collection {
 	background: #f2f2f2;
-	padding: 1rpx 0;
-	.info{
+	.noCollection {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 150rpx;
+		color: #aaa;
+		image {
+			width: 250rpx;
+			height: 250rpx;
+			margin-bottom: 30rpx;
+		}
+	}
+	.info {
 		background: #fff;
 		border-radius: 20rpx;
 		display: flex;
 		padding: 30rpx;
-		margin: 20rpx 0;
-		.img{
+		.img {
 			width: 240rpx;
 			height: 240rpx;
-			border: 1px solid #1BBB5A;
+			border: 1px solid #1bbb5a;
 			margin-right: 30rpx;
 		}
-		.detail{
+		.detail {
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
 			flex: 1;
 			font-size: 16px;
-			font-weight: bold;
-			.wrapper{
-				color: red;
-				width: 100%;
-				display: flex;
-				justify-content: space-between;
-				.icon{
-					width: 40rpx;
-					height: 40rpx;
-					border: 1px solid #d81e06;
-					border-radius: 50%;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					image{
-						width: 30rpx;
-						height: 30rpx;
-						transform: translateX(-2rpx);
-					}
-				}
+			text {
+				color: #f22f2f;
 			}
 		}
 	}

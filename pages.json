@@ -8,6 +8,8 @@
 	}, {
 		"path": "pages/me/me"
 	}, {
+		"path": "pages/components/goodDetail"
+	}, {
 		"path": "pages/me/components/detail",
 		"style":{
 			"navigationBarTitleText": "我的订单"

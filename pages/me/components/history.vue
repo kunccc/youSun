@@ -33,7 +33,7 @@ export default {
 		},
 		deleteItem(index1, index2) {
 			uni.showActionSheet({
-				itemList: ['取消收藏'],
+				itemList: ['删除历史'],
 				success: () => {
 					this.dataSource[index1].items.splice(index2, 1)
 					if (this.dataSource[index1].items.length === 0) this.dataSource.splice(index1, 1)

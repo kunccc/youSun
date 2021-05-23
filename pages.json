@@ -25,11 +25,12 @@
 			"navigationBarTitleText": "我的足迹"
 		}
 	}, {
-		"path": "pages/me/components/address"
-	}, {
 		"path": "pages/me/components/contact"
 	}, {
-		"path": "pages/me/components/coupon"
+		"path": "pages/me/components/coupon",
+		"style":{
+			"navigationBarTitleText": "优惠券"
+		}
 	}, {
 		"path": "pages/components/transform",
 		"style":{

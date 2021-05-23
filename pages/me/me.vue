@@ -50,7 +50,7 @@
 					优惠券
 					<text>0</text>
 				</view>
-				<view @click="go('address')">收货地址</view>
+				<view @click="open">收货地址</view>
 				<view @click="go('contact')">联系客服</view>
 			</view>
 		</view>
@@ -116,6 +116,16 @@ export default {
 					}, 1500)
 				})
 				.catch(err => console.log(err))
+		},
+		open(){
+			uni.authorize({
+				scope: 'scope.address',
+				success() {
+					uni.chooseAddress({
+						success: res => console.log(res)
+					})
+				}
+			})
 		}
 	}
 }

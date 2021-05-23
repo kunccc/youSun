@@ -6,14 +6,15 @@
 		</view>
 		<view class="commodity">
 			<view class="sort">
-				<text @click="go(1)" :class="{'selected': sort === 1}">热门</text>
-				<text @click="go(2)" :class="{'selected': sort === 2}">笋食</text>
-				<text @click="go(3)" :class="{'selected': sort === 3}">文创</text>
+				<text @click="jump(1)" :class="{'selected': sort === 1}">热门</text>
+				<text @click="jump(2)" :class="{'selected': sort === 2}">笋食</text>
+				<text @click="jump(3)" :class="{'selected': sort === 3}">文创</text>
 			</view>
 			<view class="show">
-				<view class="detail"><view class="img"/><view class="info"><text>绿色笋干</text><text>￥39</text></view></view>
-				<view class="detail"><view class="img"/><view class="info"><text>泡椒笋尖</text><text>￥39</text></view></view>
-				<view class="detail"><view class="img"/><view class="info"><text>酸笋</text><text>￥39</text></view></view>
+				<view class="detail" @click="go"><view class="img"/><view class="info"><text>酸笋</text><text>￥39</text></view></view>
+				<view class="detail" @click="go"><view class="img"/><view class="info"><text>笋干</text><text>￥39</text></view></view>
+				<view class="detail" @click="go"><view class="img"/><view class="info"><text>泡椒笋尖</text><text>￥39</text></view></view>
+				<view class="detail" @click="go"><view class="img"/><view class="info"><text>高级定制竹笋</text><text></text></view></view>
 			</view>
 		</view>
 	</view>
@@ -27,8 +28,13 @@ export default {
 		}
 	},
 	methods:{
-		go(value){
+		jump(value){
 			this.sort = value
+		},
+		go(){
+			uni.navigateTo({
+				url: '../components/goodDetail'
+			})
 		}
 	}
 }
@@ -87,6 +93,7 @@ export default {
 				border-bottom: 1px solid #ddd;
 				padding: 30rpx 15rpx 30rpx;
 				display: flex;
+				&:last-child{border: none;}
 				.img{
 					width: 120rpx;
 					height: 120rpx;

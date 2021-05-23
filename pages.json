@@ -1,17 +1,29 @@
 {
 	"pages": [{
-		"path": "pages/home/home"
+		"path": "pages/home/home",
+		"style":{
+			"navigationBarTitleText": "首页"
+		}
 	}, {
-		"path": "pages/sort/sort"
+		"path": "pages/sort/sort",
+		"style":{
+			"navigationBarTitleText": "分类"
+		}
 	}, {
 		"path": "pages/cart/cart",
 		"style":{
 			"navigationBarTitleText": "购物车"
 		}
 	}, {
-		"path": "pages/me/me"
+		"path": "pages/me/me",
+		"style":{
+			"navigationBarTitleText": "我的"
+		}
 	}, {
-		"path": "pages/components/goodDetail"
+		"path": "pages/components/goodDetail",
+		"style":{
+			"navigationBarTitleText": "商品详情"
+		}
 	}, {
 		"path": "pages/me/components/detail",
 		"style":{
@@ -28,7 +40,10 @@
 			"navigationBarTitleText": "我的足迹"
 		}
 	}, {
-		"path": "pages/me/components/contact"
+		"path": "pages/me/components/contact",
+		"style":{
+			"navigationBarTitleText": "客服"
+		}
 	}, {
 		"path": "pages/me/components/coupon",
 		"style":{

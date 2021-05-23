@@ -18,7 +18,7 @@
 export default {
 	data() {
 		return {
-			dataSource: [{ name: '酸笋', price: '39' }, { name: '绿色笋干', price: '59' }, { name: '泡椒笋尖', price: '29' }]
+			dataSource: [{ name: '酸笋', price: '39' }, { name: '笋干', price: '59' }, { name: '泡椒笋尖', price: '29' }]
 		}
 	},
 	methods: {

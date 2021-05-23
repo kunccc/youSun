@@ -8,7 +8,7 @@
 			</view>
 			<view class="collection">
 				<view class="wrapper" @click="go('collection')">
-					2
+					3
 					<br />
 					我的收藏
 				</view>

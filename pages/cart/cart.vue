@@ -5,6 +5,7 @@
 			购物车暂无商品
 		</view>
 		<view class="item" v-for="(item, index) in dataSource" :key="index" @longpress="deleteItem(index)">
+			<view class="triggerArea" @click="go" />
 			<view class="selector selected" v-if="item.selected" @click="toggle(item)"><image src="../../static/done.png"></image></view>
 			<view class="selector" v-else @click="toggle(item)" />
 			<view class="img" />
@@ -36,7 +37,7 @@
 export default {
 	data() {
 		return {
-			dataSource: [{ selected: false, info: '信息', price: 179, count: 1 }, { selected: false, info: '信息', price: 69, count: 1 }],
+			dataSource: [{ selected: false, info: '酸笋', price: 179, count: 1 }, { selected: false, info: '泡椒笋尖', price: 69, count: 1 }],
 		}
 	},
 	computed:{
@@ -81,6 +82,12 @@ export default {
 				itemList: ['删除'],
 				success: () => this.dataSource.splice(index, 1)
 			})
+		},
+		go(){
+			uni.navigateTo({
+				url: '../components/goodDetail',
+				fail: err => console.log(err)
+			})
 		}
 	}
 }
@@ -109,6 +116,13 @@ export default {
 		padding: 30rpx;
 		display: flex;
 		position: relative;
+		.triggerArea{
+			position: absolute;
+			top: 0;
+			left: 90rpx;
+			width: 650rpx;
+			height: 180rpx;
+		}
 		.selector {
 			width: 35rpx;
 			height: 35rpx;
@@ -157,6 +171,7 @@ export default {
 					align-items: center;
 					.minus {
 						width: 24rpx;
+						height: 24rpx;
 						position: relative;
 						&::before {
 							content: '';
@@ -255,7 +270,7 @@ export default {
 			align-items: center;
 			justify-content: space-between;
 			.action{
-				background: linear-gradient(135deg, rgba(255,62,72,1) 0%, rgba(248,46,30,1) 100%);
+				background: linear-gradient(135deg, rgba(46,213,112,1) 0%, rgba(27,187,90,1) 100%);
 				border-radius: 50rpx;
 				padding: 18rpx 45rpx;
 				color: #fff;

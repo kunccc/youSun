@@ -7,7 +7,17 @@
 			</view>
 			<view class="money">
 				<text class="value">￥10</text>
-				<text>满99元可用</text>
+				<text class="desc">满99元可用</text>
+			</view>
+		</view>
+		<view class="item" @click="go">
+			<view class="info">
+				<text class="name">无门槛通用券</text>
+				<text class="date">2021.05.07-2021.05.31</text>
+			</view>
+			<view class="money">
+				<text class="value">￥20</text>
+				<text class="desc">满199元可用</text>
 			</view>
 		</view>
 	</view>
@@ -30,7 +40,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	.item {
-		margin: 20rpx;
+		margin: 20rpx 20rpx 0;
 		display: flex;
 		height: 200rpx;
 		.info {
@@ -43,9 +53,12 @@ export default {
 			position: relative;
 			padding: 35rpx;
 			.name {
-				font-size: 17px;
+				font-size: 16px;
 				color: #000;
 				margin-bottom: 10rpx;
+			}
+			.date{
+				font-size: 12px;
 			}
 			&::before {
 				content: '';
@@ -78,9 +91,12 @@ export default {
 			justify-content: center;
 			border-radius: 10rpx;
 			.value {
-				font-size: 26px;
+				font-size: 24px;
 				font-weight: bold;
-				transform: translateX(-4rpx);
+				transform: translateX(-5rpx);
+			}
+			.desc{
+				font-size: 12px;
 			}
 		}
 	}

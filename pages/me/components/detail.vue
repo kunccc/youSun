@@ -30,7 +30,7 @@
 				</view>
 				<view class="footer">
 					<view @click="go('transform')">查看物流</view>
-					<view>再次购买</view>
+					<view @click="go('cart')">再次购买</view>
 				</view>
 			</view>
 		</view>
@@ -60,19 +60,20 @@ export default {
 	methods: {
 		jump(value) {
 			this.page = value
+			const routes = getCurrentPages()
+			routes[routes.length - 1].options.page = value
 		},
-		go(value){
-			if(value === 'goodDetail'){
-				uni.navigateTo({
-					url: `../../mall/components/${value}`
+		go(value) {
+			if(value === 'cart') {
+				uni.switchTab({
+					url: '../../cart/cart'
 				})
-				return
 			}
 			uni.navigateTo({
-				url: `./${value}`
+				url: `../../components/${value}`
 			})
 		},
-		remove(id){
+		remove(id) {
 			uni.showModal({
 				content: '确认删除此订单？',
 				success: res => {
@@ -143,14 +144,14 @@ export default {
 		}
 	}
 	.itemWrapper {
-		.noOrder{
+		.noOrder {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 			margin-top: 180rpx;
 			color: #aaa;
-			image{
+			image {
 				width: 200rpx;
 				height: 200rpx;
 				margin-bottom: 30rpx;
@@ -168,7 +169,7 @@ export default {
 			&:first-child {
 				margin-top: 120rpx;
 			}
-			.triggerArea{
+			.triggerArea {
 				position: absolute;
 				width: 660rpx;
 				height: 280rpx;

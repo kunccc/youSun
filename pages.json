@@ -31,7 +31,7 @@
 	}, {
 		"path": "pages/me/components/coupon"
 	}, {
-		"path": "pages/me/components/transform",
+		"path": "pages/components/transform",
 		"style":{
 			"navigationBarTitleText": "查看物流"
 		}

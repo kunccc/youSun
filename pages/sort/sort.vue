@@ -37,6 +37,9 @@ export default {
 <style lang="scss" scoped>
 .sunYuan{
 	background: #1BBB5A;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 	.search{
 		display: flex;
 		justify-content: center;
@@ -52,13 +55,13 @@ export default {
 		}
 	}
 	.commodity{
-		margin-top: 40rpx;
+		margin-top: 30rpx;
 		background: #f2f2f2;
-		border-top-left-radius: 50rpx;
-		border-top-right-radius: 50rpx;
-		min-height: 100vh;
+		border-top-left-radius: 40rpx;
+		border-top-right-radius: 40rpx;
 		padding: 50rpx 50rpx 0;
 		display: flex;
+		flex: 1;
 		.sort{
 			display: flex;
 			flex-direction: column;
@@ -77,8 +80,8 @@ export default {
 		.show{
 			background: #fff;
 			width: 440rpx;
-			border-top-left-radius: 40rpx;
-			border-top-right-radius: 40rpx;
+			border-top-left-radius: 30rpx;
+			border-top-right-radius: 30rpx;
 			padding: 0 20rpx;
 			.detail{
 				border-bottom: 1px solid #ddd;
@@ -96,8 +99,7 @@ export default {
 					justify-content: space-between;
 					text{
 						&:first-child{
-							font-size: 18px;
-							font-weight: bold;
+							font-size: 17px;
 						}
 						&:last-child{
 							color: red;

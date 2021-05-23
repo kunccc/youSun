@@ -134,6 +134,9 @@ export default {
 <style lang="scss" scoped>
 .me {
 	background: #1bbb5a;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 	.info {
 		display: flex;
 		flex-direction: column;
@@ -178,7 +181,7 @@ export default {
 		background: #f2f2f2;
 		border-top-left-radius: 50rpx;
 		border-top-right-radius: 50rpx;
-		min-height: 100vh;
+		flex: 1;
 		padding: 30rpx;
 		.order {
 			background: #fff;

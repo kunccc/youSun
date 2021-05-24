@@ -11,21 +11,23 @@
 				<text @click="jump(3)" :class="{'selected': sort === 3}">文创</text>
 			</view>
 			<view class="show">
-				<view class="detail" @click="go"><view class="img"/><view class="info"><text>酸笋</text><text>￥39</text></view></view>
-				<view class="detail" @click="go"><view class="img"/><view class="info"><text>笋干</text><text>￥39</text></view></view>
-				<view class="detail" @click="go"><view class="img"/><view class="info"><text>泡椒笋尖</text><text>￥39</text></view></view>
-				<view class="detail" @click="go"><view class="img"/><view class="info"><text>高级定制竹笋</text><text></text></view></view>
+				<view v-for="(good, index) in allGoods" :key="index" class="detail" @click="go"><view class="img"/><view class="info"><text>{{good.name}}</text><text>{{good.price}}</text></view></view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+	
 export default {
 	data(){
 		return{
 			sort: 1
 		}
+	},
+	computed:{
+		...mapGetters(['allGoods'])
 	},
 	methods:{
 		jump(value){
@@ -36,16 +38,14 @@ export default {
 				url: '../components/goodDetail'
 			})
 		}
-	}
+	},
 }
 </script>
 
 <style lang="scss" scoped>
 .sunYuan{
 	background: #1BBB5A;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
+	height: calc(100vh - 78px);
 	.search{
 		display: flex;
 		justify-content: center;
@@ -67,7 +67,7 @@ export default {
 		border-top-right-radius: 40rpx;
 		padding: 50rpx 50rpx 0;
 		display: flex;
-		flex: 1;
+		height: 100%;
 		.sort{
 			display: flex;
 			flex-direction: column;

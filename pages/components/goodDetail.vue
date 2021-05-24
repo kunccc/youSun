@@ -3,7 +3,7 @@
 		<view class="swiper" />
 		<view class="wrapper">
 			<view class="price">￥319</view>
-			<view class="collect" :class="isSelected ? 'isSelected' : 'noSelected'" @click="toggle">
+			<view class="collect" :class="{'isSelected': isSelected}" @click="toggle">
 				<image :src="isSelected ? '../../static/heart-active.png' : '../../static/heart.png'" />
 				<text>{{isSelected ? '已收藏' : '收藏'}}</text>
 			</view>
@@ -47,7 +47,6 @@ export default {
 <style lang="scss" scoped>
 .goodDetail {
 	position: relative;
-	height: calc(100vh - 43px);
 	.swiper {
 		height: 500rpx;
 		background: #fff;
@@ -71,6 +70,7 @@ export default {
 			align-items: center;
 			position: absolute;
 			top: 30rpx;
+			right: 38rpx;
 			image {
 				width: 35rpx;
 				height: 35rpx;
@@ -79,33 +79,14 @@ export default {
 			text {
 				font-size: 12px;
 			}
-			&.noSelected{
-				right: 38rpx;
-				image{
-					animation: .5s both off;
-				}
-			}
 			&.isSelected{
 				right: 26rpx;
 				image{
-					animation: .5s both on;
+					animation: .5s on;
 				}
 			}
 		}
 		@keyframes on {
-			0%{
-				transform: scale(1);
-				opacity: 0;
-			}
-			50%{
-				transform: scale(1.2);
-			}
-			100%{
-				transform: scale(1);
-				opacity: 1;
-			}
-		}
-		@keyframes off {
 			0%{
 				transform: scale(1);
 				opacity: 0;

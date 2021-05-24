@@ -1,16 +1,16 @@
 <template>
 	<view class="cart">
-		<view class="noGoods" v-if="dataSource.length === 0">
+		<view class="noGoods" v-if="cart.length === 0">
 			<image src="../../static/noGoods.png" />
 			购物车暂无商品
 		</view>
-		<view class="item" v-for="(item, index) in dataSource" :key="index" @longpress="deleteItem(index)">
+		<view class="item" v-for="(item, index) in cart" :key="index" @longpress="deleteItem(index)">
 			<view class="triggerArea" @click="go" />
 			<view class="selector selected" v-if="item.selected" @click="toggle(item)"><image src="../../static/done.png"></image></view>
 			<view class="selector" v-else @click="toggle(item)" />
 			<view class="img" />
 			<view class="info">
-				<text>{{ item.info }}</text>
+				<text>{{ item.name }}</text>
 				<view class="wrapper">
 					<text class="price">￥{{ item.price }}</text>
 					<view class="picker">
@@ -26,44 +26,46 @@
 			<view class="selector" v-else @click="toggleAll(true)" />
 			<text>全选</text>
 			<view class="wrapper">
-				<text>合计:￥{{totalPrice}}</text>
-				<view class="action">去结算({{totalItems}})</view>
+				<text>合计:￥{{ totalPrice }}</text>
+				<view class="action">去结算({{ totalItems }})</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
-	data() {
-		return {
-			dataSource: [{ selected: false, info: '酸笋', price: 179, count: 1 }, { selected: false, info: '泡椒笋尖', price: 69, count: 1 }],
-		}
-	},
-	computed:{
-		totalPrice(){
+	computed: {
+		...mapGetters(['cart']),
+		totalPrice() {
 			let sum = 0
-			this.dataSource.forEach(item => {
-				if(item.selected) sum += item.price * item.count
+			this.cart.forEach(item => {
+				if (item.selected) sum += item.price * item.count
+			})
+			const index = sum.toString().indexOf('.')
+			if (index < 0) return sum.toString() + '.0'
+			if (sum.toString().slice(index + 1, -1).length > 1) return sum.toString().slice(0, index + 2)
+			return sum
+		},
+		totalItems() {
+			let sum = 0
+			this.cart.forEach(item => {
+				if (item.selected) sum += 1
 			})
 			return sum
 		},
-		totalItems(){
-			let sum = 0
-			this.dataSource.forEach(item => {
-				if(item.selected) sum += 1
-			})
-			return sum
-		},
-		isSelectAll(){
-			if(this.dataSource.length === 0) return false
-			for(let item of this.dataSource){
-				if(!item.selected) return false
+		isSelectAll() {
+			if (this.cart.length === 0) return false
+			for (let item of this.cart) {
+				if (!item.selected) return false
 			}
 			return true
 		}
 	},
 	methods: {
+		...mapMutations(['toggleAll', 'deleteCartItem']),
 		toggle(item) {
 			item.selected = !item.selected
 		},
@@ -74,19 +76,15 @@ export default {
 		plus(item) {
 			item.count += 1
 		},
-		toggleAll(value) {
-			for (let item of this.dataSource) item.selected = value
-		},
-		deleteItem(index){
+		deleteItem(index) {
 			uni.showActionSheet({
 				itemList: ['删除'],
-				success: () => this.dataSource.splice(index, 1)
+				success: () => this.deleteCartItem(index)
 			})
 		},
-		go(){
+		go() {
 			uni.navigateTo({
-				url: '../components/goodDetail',
-				fail: err => console.log(err)
+				url: '../components/goodDetail'
 			})
 		}
 	}
@@ -95,7 +93,7 @@ export default {
 
 <style lang="scss" scoped>
 .cart {
-	.noGoods{
+	.noGoods {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -116,7 +114,7 @@ export default {
 		padding: 30rpx;
 		display: flex;
 		position: relative;
-		.triggerArea{
+		.triggerArea {
 			position: absolute;
 			top: 0;
 			left: 90rpx;
@@ -237,7 +235,7 @@ export default {
 		height: 100rpx;
 		padding: 0 30rpx 0 80rpx;
 		background: #fff;
-		box-shadow: 0 0 1px rgba(0,0,0,0.25);
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
 		.selector {
 			width: 35rpx;
 			height: 35rpx;
@@ -262,15 +260,15 @@ export default {
 				}
 			}
 		}
-		.wrapper{
+		.wrapper {
 			display: flex;
 			flex: 1;
 			height: 100%;
 			margin-left: 30rpx;
 			align-items: center;
 			justify-content: space-between;
-			.action{
-				background: linear-gradient(135deg, rgba(46,213,112,1) 0%, rgba(27,187,90,1) 100%);
+			.action {
+				background: linear-gradient(135deg, rgba(46, 213, 112, 1) 0%, rgba(27, 187, 90, 1) 100%);
 				border-radius: 50rpx;
 				padding: 18rpx 45rpx;
 				color: #fff;

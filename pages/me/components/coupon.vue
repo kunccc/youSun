@@ -1,30 +1,25 @@
 <template>
 	<view class="coupon">
-		<view class="item" @click="go">
+		<view class="item" @click="go" v-for="(item, index) in coupon" :key="index">
 			<view class="info">
-				<text class="name">无门槛通用券</text>
-				<text class="date">2021.05.07-2021.05.31</text>
+				<text class="name">{{item.name}}</text>
+				<text class="date">{{item.effectiveDate}}</text>
 			</view>
 			<view class="money">
-				<text class="value">￥10</text>
-				<text class="desc">满99元可用</text>
-			</view>
-		</view>
-		<view class="item" @click="go">
-			<view class="info">
-				<text class="name">无门槛通用券</text>
-				<text class="date">2021.05.07-2021.05.31</text>
-			</view>
-			<view class="money">
-				<text class="value">￥20</text>
-				<text class="desc">满199元可用</text>
+				<text class="value">￥{{item.value}}</text>
+				<text class="desc">满{{item.least}}元可用</text>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
+	computed: {
+		...mapGetters(['coupon'])
+	},
 	methods: {
 		go() {
 			uni.switchTab({

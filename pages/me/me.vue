@@ -8,12 +8,12 @@
 			</view>
 			<view class="collection">
 				<view class="wrapper" @click="go('collection')">
-					3
+					{{$store.state.collection.length}}
 					<br />
 					我的收藏
 				</view>
 				<view class="wrapper" @click="go('history')">
-					3
+					{{$store.getters.historyCounts}}
 					<br />
 					我的足迹
 				</view>
@@ -134,9 +134,9 @@ export default {
 <style lang="scss" scoped>
 .me {
 	background: #1bbb5a;
+	height: calc(100vh - 94px);
 	display: flex;
 	flex-direction: column;
-	flex: 1;
 	.info {
 		display: flex;
 		flex-direction: column;

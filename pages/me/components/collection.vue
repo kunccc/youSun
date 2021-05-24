@@ -1,27 +1,28 @@
 <template>
 	<view class="collection">
-		<view v-if="dataSource.length === 0" class="noCollection">
+		<view v-if="collection.length === 0" class="noCollection">
 			<image src="../../../static/cancelCollection.png" />
 			暂无收藏
 		</view>
-		<view @longpress="deleteItem(index)" v-for="(item, index) in dataSource" :key="index" class="info" @click="go('goodDetail')">
+		<view @longpress="deleteItem(index)" v-for="(item, index) in collection" :key="index" class="info" @click="go('goodDetail')">
 			<view class="img" />
 			<view class="detail">
 				{{ item.name }}
-				<text>￥{{ item.price }}</text>
+				<text>{{ item.price }}</text>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'	
+
 export default {
-	data() {
-		return {
-			dataSource: [{ name: '酸笋', price: '39' }, { name: '笋干', price: '59' }, { name: '泡椒笋尖', price: '29' }]
-		}
+	computed: {
+		...mapGetters(['collection'])
 	},
 	methods: {
+		...mapMutations(['deleteCollectionItem']),
 		go(value) {
 			uni.navigateTo({
 				url: `../../components/goodDetail`
@@ -30,7 +31,7 @@ export default {
 		deleteItem(index) {
 			uni.showActionSheet({
 				itemList: ['取消收藏'],
-				success: () => this.dataSource.splice(index, 1)
+				success: () => this.deleteCollectionItem(index)
 			})
 		}
 	}

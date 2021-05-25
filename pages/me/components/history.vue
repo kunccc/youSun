@@ -5,7 +5,7 @@
 			暂无浏览历史
 		</view>
 		<view class="wrapper" v-for="(group, index1) in history" :key="index1">
-			<text class="title">{{ group.date }}</text>
+			<text class="title">{{showedDate(group)}}</text>
 			<view @longpress="deleteItem(index1, index2)" @click="go(item.id)" class="item" v-for="(item, index2) in group.items" :key="index2">
 				<view class="img" />
 				<text class="price">{{ item.price }}</text>
@@ -16,13 +16,17 @@
 
 <script>
 import {mapGetters, mapMutations} from 'vuex'
+import {friendlyDate} from '../../components/friendlyDate.js'
 
 export default {
 	computed:{
-		...mapGetters(['history'])
+		...mapGetters(['history']),
 	},
 	methods: {
 		...mapMutations(['deleteHistoryItem', 'deleteHistoryGroup']),
+		showedDate(group){
+			return group.date === friendlyDate(new Date()) ? '今天' : group.date
+		},
 		go(id) {
 			uni.navigateTo({
 				url: `../../components/goodDetail?id=${id}`

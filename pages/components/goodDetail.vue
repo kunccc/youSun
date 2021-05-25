@@ -29,6 +29,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import {friendlyDate} from './friendlyDate.js' 
 
 export default {
 	data() {
@@ -39,16 +40,20 @@ export default {
 	computed: {
 		...mapGetters(['allGoods']),
 		goodDetail() {
-			return this.allGoods.find(item => item.id === parseInt(this.id))
+			return this.allGoods.find(item => item.id === this.id)
 		}
 	},
 	methods: {
-		...mapMutations(['toggleIsCollected'])
+		...mapMutations(['toggleIsCollected', 'addHistoryItem'])
 	},
 	onShow() {
 		const routes = getCurrentPages()
-		this.id = routes[routes.length - 1].options.id
-	},
+		this.id = parseInt(routes[routes.length - 1].options.id)
+		const date = friendlyDate(new Date())
+		const id = this.id
+		const price = this.allGoods.find(item => item.id === this.id).price
+		this.addHistoryItem({date, id, price})
+	}
 }
 </script>
 

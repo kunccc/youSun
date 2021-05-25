@@ -16,10 +16,7 @@ const store = new Vuex.Store({
 			{id: 2, name: '笋干', price: 16.8, count: 1, selected: false}
 		],
 		collection: [],
-		history: [
-			{ date: '今天', items: [{ id: 1, price: '￥10.8/斤' }, { id: 2, price: '￥16.8/斤' }] },
-			{ date: '5月22日', items: [{ id: 3, price: '18.8/斤' }] }
-		],
+		history: [],
 		allOrders: [
 			{ id: 1, orderId: 1, name: '酸笋', price: '￥10.8', status: '待发货', count: '1' },
 			{ id: 2, orderId: 2, name: '笋干', price: '￥16.8', status: '待收货', count: '3' },
@@ -77,6 +74,18 @@ const store = new Vuex.Store({
 		},
 		deleteHistoryGroup(state, index){
 			state.history.splice(index, 1)
+		},
+		addHistoryItem(state, {date, id, price}){
+			for(let group of state.history) {
+				if(group.date === date) {
+					for(let item of group.items){
+						if(item.id === id) group.items.splice(group.items.indexOf(item), 1)
+					}
+					group.items.unshift({id, price})
+					return
+				}
+			}
+			state.history.unshift({date, items: [{id, price}]})
 		},
 		deleteOrderItem(state, orderId){
 			state.allOrders = state.allOrders.filter(item => item.orderId !== orderId)

@@ -1,5 +1,5 @@
 <template>
-	<view class="detail">
+	<view class="allOrders">
 		<view class="header">
 			<view @click="jump('1')" :class="{ selected: page === '1' }">全部</view>
 			<view @click="jump('2')" :class="{ selected: page === '2' }">待发货</view>
@@ -18,12 +18,15 @@
 				<view class="main">
 					<view class="img"></view>
 					<view class="info">
-						<view class="status">
-							{{ item.status }} 丨
-							<image src="../../../static/remove.png" @click="remove(item.id)" />
+						<view class="header">
+							<view class="name">{{item.name}}</view>
+							<view class="status">
+								{{ item.status }} 丨
+								<image src="../../../static/remove.png" @click="remove(item.orderId)" />
+							</view>
 						</view>
 						<view class="wrapper">
-							<text class="price">￥{{ item.price }}</text>
+							<text class="price">{{ item.price }}</text>
 							<text class="count">x{{ item.count }}</text>
 						</view>
 					</view>
@@ -38,17 +41,12 @@
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'
+	
 export default {
 	data() {
 		return {
 			page: '1',
-			// 虚假的源数据 应从vuex拿
-			dataSource: [
-				{ id: 1, status: '待发货', price: '4999', count: '1' },
-				{ id: 2, status: '待收货', price: '289', count: '3' },
-				{ id: 3, status: '待评价', price: '799', count: '1' },
-				{ id: 4, status: '已完成', price: '299', count: '2' }
-			],
 			map: {
 				2: '待发货',
 				3: '待收货',
@@ -57,14 +55,26 @@ export default {
 			}
 		}
 	},
+	computed: {
+		...mapGetters([
+			'allOrders'
+		]),
+		data: function() {
+			if (this.page === '1') return this.allOrders
+			return this.allOrders.filter(item => item.status === this.map[this.page])
+		}
+	},
 	methods: {
+		...mapMutations([
+			'deleteOrderItem'
+		]),
 		jump(value) {
 			this.page = value
 			const routes = getCurrentPages()
 			routes[routes.length - 1].options.page = value
 		},
 		go(value) {
-			if(value === 'cart') {
+			if (value === 'cart') {
 				uni.switchTab({
 					url: '../../cart/cart'
 				})
@@ -73,19 +83,13 @@ export default {
 				url: `../../components/${value}`
 			})
 		},
-		remove(id) {
+		remove(orderId) {
 			uni.showModal({
 				content: '确认删除此订单？',
 				success: res => {
-					if (res.confirm) this.dataSource = this.dataSource.filter(item => item.id !== id)
+					if (res.confirm) this.deleteOrderItem(orderId)
 				}
 			})
-		}
-	},
-	computed: {
-		data: function() {
-			if (this.page === '1') return this.dataSource
-			return this.dataSource.filter(item => item.status === this.map[this.page])
 		}
 	},
 	onShow() {
@@ -96,10 +100,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.detail {
+.allOrders {
 	background: #f2f2f2;
 	position: relative;
-	.header {
+	> .header {
 		background: #fff;
 		padding: 20rpx 0 40rpx;
 		border-bottom-left-radius: 30rpx;
@@ -158,7 +162,6 @@ export default {
 				margin-bottom: 30rpx;
 			}
 		}
-
 		.item {
 			background: #fff;
 			border-radius: 30rpx;
@@ -184,20 +187,34 @@ export default {
 					width: 200rpx;
 					height: 200rpx;
 					border: 1px solid #1bbb5a;
+					margin-right: 30rpx;
 				}
 				.info {
 					display: flex;
 					flex-direction: column;
 					align-items: flex-end;
 					justify-content: space-between;
-					.status {
+					flex: 1;
+					.header {
 						display: flex;
-						justify-content: flex-end;
-						align-items: center;
-						image {
-							width: 34rpx;
-							height: 34rpx;
-							margin-left: 4rpx;
+						width: 100%;
+						justify-content: space-between;
+						.name {
+							font-size: 16px;
+							max-width: 260rpx;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+						.status {
+							display: flex;
+							justify-content: flex-end;
+							align-items: center;
+							image {
+								width: 34rpx;
+								height: 34rpx;
+								margin-left: 4rpx;
+							}
 						}
 					}
 					.wrapper {

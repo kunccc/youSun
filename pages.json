@@ -25,7 +25,7 @@
 			"navigationBarTitleText": "商品详情"
 		}
 	}, {
-		"path": "pages/me/components/detail",
+		"path": "pages/me/components/allOrders",
 		"style":{
 			"navigationBarTitleText": "我的订单"
 		}

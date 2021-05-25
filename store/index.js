@@ -25,7 +25,10 @@ const store = new Vuex.Store({
 			{ date: '5月22日', items: [{ id: 3, price: '18.8/斤' }] }
 		],
 		allOrders: [
-			
+			{ id: 1, orderId: 1, name: '酸笋', price: '￥10.8', status: '待发货', count: '1' },
+			{ id: 2, orderId: 2, name: '笋干', price: '￥16.8', status: '待收货', count: '3' },
+			{ id: 3, orderId: 3, name: '泡椒笋尖', price: '￥18.8', status: '待评价', count: '1' },
+			{ id: 4, orderId: 4, name: '高级定制竹笋', price: '', status: '已完成', count: '2' }
 		],
 		coupon: [
 			{name: '无门槛通用券', effectiveDate: '2021.05.07-2021.05.31', value: 10, least: 99},
@@ -75,6 +78,9 @@ const store = new Vuex.Store({
 		},
 		deleteHistoryGroup(state, index){
 			state.history.splice(index, 1)
+		},
+		deleteOrderItem(state, orderId){
+			state.allOrders = state.allOrders.filter(item => item.orderId !== orderId)
 		}
 	}
 })

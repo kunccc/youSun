@@ -8,12 +8,12 @@
 			</view>
 			<view class="collection">
 				<view class="wrapper" @click="go('collection')">
-					{{$store.state.collection.length}}
+					{{collectionCounts}}
 					<br />
 					我的收藏
 				</view>
 				<view class="wrapper" @click="go('history')">
-					{{$store.getters.historyCounts}}
+					{{historyCounts}}
 					<br />
 					我的足迹
 				</view>
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+	
 export default {
 	data() {
 		return {
@@ -74,6 +76,12 @@ export default {
 			key: 'avatarUrl',
 			success: res => (this.avatarUrl = res.data)
 		})
+	},
+	computed: {
+		...mapGetters([
+			'collectionCounts',
+			'historyCounts'
+		])
 	},
 	methods: {
 		jump(value) {

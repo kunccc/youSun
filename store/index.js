@@ -42,6 +42,9 @@ const store = new Vuex.Store({
 		collection(state) {
 			return state.collection
 		},
+		collectionCounts(state){
+			return state.collection.length
+		},
 		history(state) {
 			return state.history
 		},

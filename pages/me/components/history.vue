@@ -6,7 +6,7 @@
 		</view>
 		<view class="wrapper" v-for="(group, index1) in history" :key="index1">
 			<text class="title">{{ group.date }}</text>
-			<view @longpress="deleteItem(index1, index2)" @click="go" class="item" v-for="(item, index2) in group.items" :key="index2">
+			<view @longpress="deleteItem(index1, index2)" @click="go(item.id)" class="item" v-for="(item, index2) in group.items" :key="index2">
 				<view class="img" />
 				<text class="price">{{ item.price }}</text>
 			</view>
@@ -23,9 +23,9 @@ export default {
 	},
 	methods: {
 		...mapMutations(['deleteHistoryItem', 'deleteHistoryGroup']),
-		go() {
+		go(id) {
 			uni.navigateTo({
-				url: `../../components/goodDetail`
+				url: `../../components/goodDetail?id=${id}`
 			})
 		},
 		deleteItem(index1, index2) {

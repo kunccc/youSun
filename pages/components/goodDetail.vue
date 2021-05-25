@@ -2,15 +2,15 @@
 	<view class="goodDetail">
 		<view class="swiper" />
 		<view class="wrapper">
-			<view class="price">￥319</view>
-			<view class="collect" :class="{'isSelected': isSelected}" @click="toggle">
+			<view class="price">{{ goodDetail.price }}</view>
+			<view class="collect" :class="{ isSelected: isSelected }" @click="toggle">
 				<image :src="isSelected ? '../../static/heart-active.png' : '../../static/heart.png'" />
-				<text>{{isSelected ? '已收藏' : '收藏'}}</text>
+				<text>{{ isSelected ? '已收藏' : '收藏' }}</text>
 			</view>
 		</view>
 		<view class="info">
-			<view class="name">酸笋</view>
-			<view class="slogan">"舒酸之后,胃口大开"</view>
+			<view class="name">{{ goodDetail.name }}</view>
+			<view class="slogan">{{'"' + goodDetail.slogan + '"'}}</view>
 		</view>
 		<view class="comments">
 			<text class="title">评价</text>
@@ -18,9 +18,7 @@
 		</view>
 		<view class="desc">
 			<text class="title">商品详情</text>
-			<view class="detail">
-				酸笋味酸，清新爽口，既可生吃，又可熟吃，酸笋发酵产生酸味的乳酸菌，不但可以促进食欲，而且能够促进胃肠内的蛋白质分解和吸收，有非常好的开胃健食的作用，因而酸脆过后，胃口大开。
-			</view>
+			<view class="detail">{{ goodDetail.intro }}</view>
 		</view>
 		<view class="bar">
 			<view class="addToCart">加入购物车</view>
@@ -30,11 +28,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
 	data() {
 		return {
-			isSelected: false
+			isSelected: false,
+			id: 0
 		}
+	},
+	computed: {
+		...mapGetters(['allGoods']),
+		goodDetail() {
+			return this.allGoods.find(item => item.id === parseInt(this.id))
+		}
+	},
+	onShow() {
+		const routes = getCurrentPages()
+		this.id = routes[routes.length - 1].options.id
+		console.log(this.id)
 	},
 	methods: {
 		toggle() {
@@ -79,22 +91,22 @@ export default {
 			text {
 				font-size: 12px;
 			}
-			&.isSelected{
+			&.isSelected {
 				right: 26rpx;
-				image{
-					animation: .5s on;
+				image {
+					animation: 0.5s on;
 				}
 			}
 		}
 		@keyframes on {
-			0%{
+			0% {
 				transform: scale(1);
 				opacity: 0;
 			}
-			50%{
+			50% {
 				transform: scale(1.2);
 			}
-			100%{
+			100% {
 				transform: scale(1);
 				opacity: 1;
 			}
@@ -151,7 +163,7 @@ export default {
 		color: #fff;
 		.addToCart {
 			padding: 18rpx 45rpx;
-			background: linear-gradient(135deg, rgba(46, 213, 112, 1) 0%, rgba(27, 187, 90, 1) 100%);
+			background: linear-gradient(135deg, rgba(255, 183, 0, 1) 0%, rgba(255, 166, 0, 1) 100%);
 			border-radius: 50rpx;
 		}
 		.buyNow {

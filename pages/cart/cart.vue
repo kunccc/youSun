@@ -5,7 +5,7 @@
 			购物车暂无商品
 		</view>
 		<view class="item" v-for="(item, index) in cart" :key="index" @longpress="deleteItem(index)">
-			<view class="triggerArea" @click="go" />
+			<view class="triggerArea" @click="go(item.id)" />
 			<view class="selector selected" v-if="item.selected" @click="toggle(item)"><image src="../../static/done.png"></image></view>
 			<view class="selector" v-else @click="toggle(item)" />
 			<view class="img" />
@@ -82,9 +82,9 @@ export default {
 				success: () => this.deleteCartItem(index)
 			})
 		},
-		go() {
+		go(id) {
 			uni.navigateTo({
-				url: '../components/goodDetail'
+				url: `../components/goodDetail?id=${id}`
 			})
 		}
 	}

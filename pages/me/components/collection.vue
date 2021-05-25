@@ -4,7 +4,7 @@
 			<image src="../../../static/cancelCollection.png" />
 			暂无收藏
 		</view>
-		<view @longpress="deleteItem(index)" v-for="(item, index) in collection" :key="index" class="info" @click="go('goodDetail')">
+		<view @longpress="deleteItem(index)" v-for="(item, index) in collection" :key="index" class="info" @click="go(item.id)">
 			<view class="img" />
 			<view class="detail">
 				{{ item.name }}
@@ -23,9 +23,9 @@ export default {
 	},
 	methods: {
 		...mapMutations(['deleteCollectionItem']),
-		go(value) {
+		go(id) {
 			uni.navigateTo({
-				url: `../../components/goodDetail`
+				url: `../../components/goodDetail?id=${id}`
 			})
 		},
 		deleteItem(index) {

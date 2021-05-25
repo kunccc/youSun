@@ -14,7 +14,7 @@
 				暂无相关订单
 			</view>
 			<view class="item" v-for="(item, index) in data" :key="index">
-				<view @click="go('goodDetail')" class="triggerArea" />
+				<view @click="go('goodDetail', item.id)" class="triggerArea" />
 				<view class="main">
 					<view class="img"></view>
 					<view class="info">
@@ -73,10 +73,15 @@ export default {
 			const routes = getCurrentPages()
 			routes[routes.length - 1].options.page = value
 		},
-		go(value) {
+		go(value, id) {
 			if (value === 'cart') {
 				uni.switchTab({
 					url: '../../cart/cart'
+				})
+			}
+			if (value === 'goodDetail') {
+				uni.navigateTo({
+					url: `../../components/goodDetail?id=${id}`
 				})
 			}
 			uni.navigateTo({

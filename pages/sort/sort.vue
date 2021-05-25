@@ -11,7 +11,7 @@
 				<text @click="jump(3)" :class="{'selected': sort === 3}">文创</text>
 			</view>
 			<view class="show">
-				<view v-for="(good, index) in allGoods" :key="index" class="detail" @click="go"><view class="img"/><view class="info"><text>{{good.name}}</text><text>{{good.price}}</text></view></view>
+				<view v-for="(good, index) in allGoods" :key="index" class="detail" @click="go(good.id)"><view class="img"/><view class="info"><text>{{good.name}}</text><text>{{good.price}}</text></view></view>
 			</view>
 		</view>
 	</view>
@@ -33,9 +33,9 @@ export default {
 		jump(value){
 			this.sort = value
 		},
-		go(){
+		go(id){
 			uni.navigateTo({
-				url: '../components/goodDetail'
+				url: `../components/goodDetail?id=${id}`
 			})
 		}
 	},

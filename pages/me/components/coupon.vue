@@ -1,6 +1,6 @@
 <template>
 	<view class="coupon">
-		<view class="item" @click="go" v-for="(item, index) in coupon" :key="index">
+		<view class="item" v-for="(item, index) in coupon" :key="index">
 			<view class="info">
 				<text class="name">{{item.name}}</text>
 				<text class="date">{{item.effectiveDate}}</text>
@@ -20,13 +20,6 @@ export default {
 	computed: {
 		...mapGetters(['coupon'])
 	},
-	methods: {
-		go() {
-			uni.switchTab({
-				url: '../../sort/sort'
-			})
-		}
-	}
 }
 </script>
 

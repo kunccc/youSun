@@ -86,7 +86,7 @@ export default {
 	methods: {
 		jump(value) {
 			uni.navigateTo({
-				url: `./components/detail?page=${value}`
+				url: `./components/allOrders?page=${value}`
 			})
 		},
 		go(value) {

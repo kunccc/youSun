@@ -54,6 +54,11 @@
 		"style":{
 			"navigationBarTitleText": "查看物流"
 		}
+	}, {
+		"path": "pages/components/confirmOrder",
+		"style":{
+			"navigationBarTitleText": "确认订单"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",

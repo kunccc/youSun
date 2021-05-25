@@ -48,7 +48,7 @@
 			<view class="tools">
 				<view @click="go('coupon')">
 					优惠券
-					<text>0</text>
+					<text>{{coupon.length}}</text>
 				</view>
 				<view @click="open">收货地址</view>
 				<view @click="go('contact')">联系客服</view>
@@ -78,10 +78,7 @@ export default {
 		})
 	},
 	computed: {
-		...mapGetters([
-			'collectionCounts',
-			'historyCounts'
-		])
+		...mapGetters(['collectionCounts','historyCounts','coupon'])
 	},
 	methods: {
 		jump(value) {
@@ -229,7 +226,8 @@ export default {
 			justify-content: space-around;
 			text {
 				margin-left: 10rpx;
-				font-size: 28rpx;
+				font-size: 26rpx;
+				color: #666;
 			}
 		}
 	}

@@ -27,7 +27,7 @@
 			<text>全选</text>
 			<view class="wrapper">
 				<text>合计:￥{{ totalPrice }}</text>
-				<view class="action">去结算({{ totalItems }})</view>
+				<view class="action" @click="go">去结算({{ totalItems }})</view>
 			</view>
 		</view>
 	</view>
@@ -83,6 +83,21 @@ export default {
 			})
 		},
 		go(id) {
+			if (typeof id !== Number) {
+				for(let item of this.cart){
+					if(item.selected){
+						uni.navigateTo({
+							url: '../components/confirmOrder'
+						})
+						return
+					}
+				}
+				uni.showToast({
+					title: '您未选择商品',
+					icon: 'none'
+				})
+				return
+			}
 			uni.navigateTo({
 				url: `../components/goodDetail?id=${id}`
 			})

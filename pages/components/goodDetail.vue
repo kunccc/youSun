@@ -21,8 +21,8 @@
 			<view class="detail">{{ goodDetail.intro }}</view>
 		</view>
 		<view class="bar">
-			<view class="addToCart">加入购物车</view>
-			<view class="buyNow">立即购买</view>
+			<view class="addToCart" @click="addToCart">加入购物车</view>
+			<view class="buyNow" @click="go">立即购买</view>
 		</view>
 	</view>
 </template>
@@ -38,13 +38,33 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['allGoods']),
+		...mapGetters(['allGoods', 'cart']),
 		goodDetail() {
 			return this.allGoods.find(item => item.id === this.id)
 		}
 	},
 	methods: {
-		...mapMutations(['toggleIsCollected', 'addHistoryItem'])
+		...mapMutations(['toggleIsCollected', 'addHistoryItem', 'addCartItem']),
+		addToCart(){
+			for(let item of this.cart){
+				if(item.id === this.id) {
+					uni.showToast({
+					    title: '已在购物车中',
+							icon: 'none'
+					})
+					return
+				}
+			}
+			this.addCartItem(this.id)
+			uni.showToast({
+			    title: '添加购物车成功'
+			});
+		},
+		go(){
+			uni.navigateTo({
+				url: './confirmOrder'
+			})
+		}
 	},
 	onShow() {
 		const routes = getCurrentPages()

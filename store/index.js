@@ -11,10 +11,7 @@ const store = new Vuex.Store({
 			{id: 3, name: '泡椒笋尖', price: '￥18.8/斤', isCollected: false, slogan: '酸辣鲜香，\'尖\'刻不停', intro: '泡椒笋尖，以酸、辣为主，可正餐、佐餐、零嘴，时刻相伴，“尖”既指笋尖，又与“间”同音，“尖刻”音同“间刻”，突出泡椒笋尖随时就食的便携性，间刻不能停。'},
 			{id: 4, name: '高级定制竹笋', price: '', isCollected: false, slogan: '独一无二，专属于你的竹笋', intro: '高级定制竹笋可根据用户个人需求，从产品到包装进行专门制作，每一份高级定制竹笋都是世上仅有的唯一一份，可作为礼品送给亲朋好友，突出送礼人对的用心之处。'},
 		],
-		cart: [
-			{id: 1, name: '酸笋', price: 10.8, count: 1, selected: false},
-			{id: 2, name: '笋干', price: 16.8, count: 1, selected: false}
-		],
+		cart: [],
 		collection: [],
 		history: [],
 		allOrders: [
@@ -64,13 +61,17 @@ const store = new Vuex.Store({
 		deleteCartItem(state, index){
 			state.cart.splice(index, 1)
 		},
+		addCartItem(state, id){
+			const item = state.allGoods.find(item => item.id === id)
+			state.cart.unshift({id, name: item.name, price: item.price.slice(1, 5), count: 1, selected: true})
+		},
 		deleteCollectionItem(state, id){
 			for(let item of state.allGoods) {
 				if(item.id === id) item.isCollected = !item.isCollected
 			}
 		},
-		deleteHistoryItem(state, payload){
-			state.history[payload.index1].items.splice(payload.index2, 1)
+		deleteHistoryItem(state, {index1, index2}){
+			state.history[index1].items.splice(index2, 1)
 		},
 		deleteHistoryGroup(state, index){
 			state.history.splice(index, 1)

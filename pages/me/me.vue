@@ -76,6 +76,7 @@ export default {
 			key: 'avatarUrl',
 			success: res => (this.avatarUrl = res.data)
 		})
+		console.log('fuck')
 	},
 	computed: {
 		...mapGetters([

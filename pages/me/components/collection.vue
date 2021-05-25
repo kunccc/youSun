@@ -4,7 +4,7 @@
 			<image src="../../../static/cancelCollection.png" />
 			暂无收藏
 		</view>
-		<view @longpress="deleteItem(index)" v-for="(item, index) in collection" :key="index" class="info" @click="go(item.id)">
+		<view @longpress="deleteItem(item.id)" v-for="(item, index) in collection" :key="index" class="info" @click="go(item.id)">
 			<view class="img" />
 			<view class="detail">
 				{{ item.name }}
@@ -28,10 +28,10 @@ export default {
 				url: `../../components/goodDetail?id=${id}`
 			})
 		},
-		deleteItem(index) {
+		deleteItem(id) {
 			uni.showActionSheet({
 				itemList: ['取消收藏'],
-				success: () => this.deleteCollectionItem(index)
+				success: () => this.deleteCollectionItem(id)
 			})
 		}
 	}

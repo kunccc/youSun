@@ -3,9 +3,9 @@
 		<view class="swiper" />
 		<view class="wrapper">
 			<view class="price">{{ goodDetail.price }}</view>
-			<view class="collect" :class="{ isSelected: isSelected }" @click="toggle">
-				<image :src="isSelected ? '../../static/heart-active.png' : '../../static/heart.png'" />
-				<text>{{ isSelected ? '已收藏' : '收藏' }}</text>
+			<view class="collect" :class="{ 'isCollected': goodDetail.isCollected }" @click="toggleIsCollected(goodDetail.id)">
+				<image :src="goodDetail.isCollected ? '../../static/heart-active.png' : '../../static/heart.png'" />
+				<text>{{ goodDetail.isCollected ? '已收藏' : '收藏' }}</text>
 			</view>
 		</view>
 		<view class="info">
@@ -28,12 +28,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
 	data() {
 		return {
-			isSelected: false,
 			id: 0
 		}
 	},
@@ -43,16 +42,13 @@ export default {
 			return this.allGoods.find(item => item.id === parseInt(this.id))
 		}
 	},
+	methods: {
+		...mapMutations(['toggleIsCollected'])
+	},
 	onShow() {
 		const routes = getCurrentPages()
 		this.id = routes[routes.length - 1].options.id
-		console.log(this.id)
 	},
-	methods: {
-		toggle() {
-			this.isSelected = !this.isSelected
-		}
-	}
 }
 </script>
 
@@ -91,7 +87,7 @@ export default {
 			text {
 				font-size: 12px;
 			}
-			&.isSelected {
+			&.isCollected {
 				right: 26rpx;
 				image {
 					animation: 0.5s on;

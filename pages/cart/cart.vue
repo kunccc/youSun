@@ -22,8 +22,8 @@
 			</view>
 		</view>
 		<view class="total">
-			<view class="selector selected" v-if="isSelectAll" @click="toggleAll(false)"><image src="../../static/done.png"></image></view>
-			<view class="selector" v-else @click="toggleAll(true)" />
+			<view class="selector selected" v-if="isSelectAll" @click="toggleCartAll(false)"><image src="../../static/done.png"></image></view>
+			<view class="selector" v-else @click="toggleCartAll(true)" />
 			<text>全选</text>
 			<view class="wrapper">
 				<text>合计:￥{{ totalPrice }}</text>
@@ -65,7 +65,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(['toggleAll', 'deleteCartItem']),
+		...mapMutations(['toggleCartAll', 'deleteCartItem']),
 		toggle(item) {
 			item.selected = !item.selected
 		},

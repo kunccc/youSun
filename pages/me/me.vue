@@ -68,7 +68,7 @@ export default {
 		...mapMutations(['setUser']),
 		jump(value) {
 			uni.navigateTo({
-				url: `./components/allOrders?pmwage=${value}`
+				url: `./components/allOrders?page=${value}`
 			})
 		},
 		go(value) {
@@ -86,7 +86,7 @@ export default {
 			})
 		},
 		login() {
-			if (this.nickName) return
+			if (this.user) return
 			this.getInfo()
 				.then(res => {
 					uni.showLoading({

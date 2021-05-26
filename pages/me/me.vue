@@ -2,18 +2,18 @@
 	<view class="me">
 		<view class="info">
 			<view class="head">
-				<view @click="login" class="img"><image :src="avatarUrl || '../../static/noLogin.png'" :class="{ isLoginIn: nickName }"></image></view>
-				<text v-if="!nickName" @click="login">未登录</text>
-				<text v-else>{{ nickName }}</text>
+				<view @click="login" class="img"><image :src="user.avatarUrl || '../../static/noLogin.png'" :class="{ isLoginIn: user.nickName }"></image></view>
+				<text v-if="!user.nickName" @click="login">未登录</text>
+				<text v-else>{{ user.nickName }}</text>
 			</view>
 			<view class="collection">
 				<view class="wrapper" @click="go('collection')">
-					{{collectionCounts}}
+					{{ collectionCounts }}
 					<br />
 					我的收藏
 				</view>
 				<view class="wrapper" @click="go('history')">
-					{{historyCounts}}
+					{{ historyCounts }}
 					<br />
 					我的足迹
 				</view>
@@ -48,7 +48,7 @@
 			<view class="tools">
 				<view @click="go('coupon')">
 					优惠券
-					<text>{{coupon.length}}</text>
+					<text>{{ coupon.length }}</text>
 				</view>
 				<view @click="open">收货地址</view>
 				<button open-type="contact">联系客服</button>
@@ -58,32 +58,17 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-	
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
-	data() {
-		return {
-			nickName: '',
-			avatarUrl: ''
-		}
-	},
-	onShow() {
-		uni.getStorage({
-			key: 'nickName',
-			success: res => (this.nickName = res.data)
-		})
-		uni.getStorage({
-			key: 'avatarUrl',
-			success: res => (this.avatarUrl = res.data)
-		})
-	},
 	computed: {
-		...mapGetters(['collectionCounts','historyCounts','coupon'])
+		...mapGetters(['collectionCounts', 'historyCounts', 'coupon', 'user'])
 	},
 	methods: {
+		...mapMutations(['setUser']),
 		jump(value) {
 			uni.navigateTo({
-				url: `./components/allOrders?page=${value}`
+				url: `./components/allOrders?pmwage=${value}`
 			})
 		},
 		go(value) {
@@ -110,19 +95,19 @@ export default {
 					})
 					uni.setStorageSync('nickName', res.nickName)
 					uni.setStorageSync('avatarUrl', res.avatarUrl)
+					const nickName = res.nickName
+					const avatarUrl = res.avatarUrl
 					setTimeout(() => {
-						this.nickName = res.nickName
-						this.avatarUrl = res.avatarUrl
+						this.setUser({ nickName, avatarUrl })
 						uni.hideLoading()
 						uni.showToast({
-							title: '登录成功',
-							duration: 1500
+							title: '登录成功'
 						})
 					}, 1500)
 				})
 				.catch(err => console.log(err))
 		},
-		open(){
+		open() {
 			uni.authorize({
 				scope: 'scope.address',
 				success() {
@@ -229,14 +214,14 @@ export default {
 				font-size: 26rpx;
 				color: #666;
 			}
-			button{
+			button {
 				margin: 0;
 				padding: 0;
 				font-size: 14px;
 				line-height: 21px;
 				background: none;
 				color: #333;
-				&::after{
+				&::after {
 					display: none;
 				}
 			}

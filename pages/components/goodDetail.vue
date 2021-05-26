@@ -46,6 +46,10 @@ export default {
 	methods: {
 		...mapMutations(['toggleIsCollected', 'addHistoryItem', 'addCartItem']),
 		addToCart(){
+			uni.checkSession({
+				complete: res => console.log(res)
+			})
+			return
 			for(let item of this.cart){
 				if(item.id === this.id) {
 					uni.showToast({

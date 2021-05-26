@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
+		user: {},
 		allGoods: [
 			{id: 1, name: '酸笋', price: '￥10.8/斤', isCollected: false, slogan: '舒酸之后，胃口大开', intro: '酸笋味酸，清新爽口，既可生吃，又可熟吃，酸笋发酵产生酸味的乳酸菌，不但可以促进食欲，而且能够促进胃肠内的蛋白质分解和吸收，有非常好的开胃健食的作用，因而酸脆过后，胃口大开。'},
 			{id: 2, name: '笋干', price: '￥16.8/斤', isCollected: false, slogan: '干货袭来，\'笋\'友相会', intro: '笋干是以笋为原料，通过去壳切根修整、高温蒸煮、清水浸漂、手工切片/压榨成型处理、自然晾晒/烘干、整形包装等多道工序精制而成，是以成干货，且不可直接食用。'},
@@ -26,6 +27,9 @@ const store = new Vuex.Store({
 		]
 	},
 	getters: {
+		user(state){
+			return state.user
+		},
 		allGoods(state) {
 			return state.allGoods
 		},
@@ -55,6 +59,9 @@ const store = new Vuex.Store({
 		},
 	},
 	mutations: {
+		setUser(state, {nickName, avatarUrl}){
+			state.user = {nickName, avatarUrl}
+		},
 		toggleCartAll(state, value){
 			for (let item of state.cart) item.selected = value
 		},

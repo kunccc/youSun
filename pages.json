@@ -5,9 +5,9 @@
 			"navigationBarTitleText": "首页"
 		}
 	}, {
-		"path": "pages/sort/sort",
+		"path": "pages/sunYuan/sunYuan",
 		"style":{
-			"navigationBarTitleText": "分类"
+			"navigationBarTitleText": "笋园"
 		}
 	}, {
 		"path": "pages/cart/cart",
@@ -77,10 +77,10 @@
 			"selectedIconPath": "static/home-active.png",
 			"text": "首页"
 		},{
-			"pagePath": "pages/sort/sort",
-			"iconPath": "static/sort.png",
-			"selectedIconPath": "static/sort-active.png",
-			"text": "分类"
+			"pagePath": "pages/sunYuan/sunYuan",
+			"iconPath": "static/sunYuan.png",
+			"selectedIconPath": "static/sunYuan-active.png",
+			"text": "笋园"
 		}, {
 			"pagePath": "pages/cart/cart",
 			"iconPath": "static/cart.png",

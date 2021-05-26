@@ -74,15 +74,11 @@ export default {
 			routes[routes.length - 1].options.page = value
 		},
 		go(value, id) {
-			if (value === 'cart') {
-				uni.switchTab({
-					url: '../../cart/cart'
-				})
-			}
 			if (value === 'goodDetail') {
 				uni.navigateTo({
 					url: `../../components/goodDetail?id=${id}`
 				})
+				return
 			}
 			uni.navigateTo({
 				url: `../../components/${value}`

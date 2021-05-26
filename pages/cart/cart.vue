@@ -27,7 +27,7 @@
 			<text>全选</text>
 			<view class="wrapper">
 				<text>合计:￥{{ totalPrice }}</text>
-				<view class="action" @click="go">去结算({{ totalItems }})</view>
+				<view class="action" @click="go('cal')">去结算({{ totalItems }})</view>
 			</view>
 		</view>
 	</view>
@@ -83,7 +83,7 @@ export default {
 			})
 		},
 		go(id) {
-			if (typeof id !== Number) {
+			if (id === 'cal') {
 				for(let item of this.cart){
 					if(item.selected){
 						uni.navigateTo({

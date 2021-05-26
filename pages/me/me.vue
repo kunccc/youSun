@@ -51,7 +51,7 @@
 					<text>{{coupon.length}}</text>
 				</view>
 				<view @click="open">收货地址</view>
-				<view @click="go('contact')">联系客服</view>
+				<button open-type="contact">联系客服</button>
 			</view>
 		</view>
 	</view>
@@ -228,6 +228,17 @@ export default {
 				margin-left: 10rpx;
 				font-size: 26rpx;
 				color: #666;
+			}
+			button{
+				margin: 0;
+				padding: 0;
+				font-size: 14px;
+				line-height: 21px;
+				background: none;
+				color: #333;
+				&::after{
+					display: none;
+				}
 			}
 		}
 	}

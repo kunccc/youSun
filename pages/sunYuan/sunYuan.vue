@@ -5,48 +5,52 @@
 			<input placeholder="搜索商品" disabled />
 		</view>
 		<view class="commodity">
-			<view class="sort">
-				<text @click="jump(1)" :class="{'selected': sort === 1}">热门</text>
-				<text @click="jump(2)" :class="{'selected': sort === 2}">笋食</text>
-				<text @click="jump(3)" :class="{'selected': sort === 3}">文创</text>
-			</view>
 			<view class="show">
-				<view v-for="(good, index) in allGoods" :key="index" class="detail" @click="go(good.id)"><view class="img"/><view class="info"><text>{{good.name}}</text><text>{{good.price}}</text></view></view>
+				<view v-for="(good, index) in allGoods" :key="index" class="detail" @click="go(good.id)">
+					<view class="img" />
+					<view class="info">
+						<view>
+							<view>{{ good.name }}</view>
+							<view>{{ '"' + good.slogan + '"' }}</view>
+						</view>
+						<view>{{ good.price }}</view>
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-	
+import { mapGetters } from 'vuex'
+
 export default {
-	data(){
-		return{
+	data() {
+		return {
 			sort: 1
 		}
 	},
-	computed:{
+	computed: {
 		...mapGetters(['allGoods'])
 	},
-	methods:{
-		jump(value){
+	methods: {
+		jump(value) {
 			this.sort = value
 		},
-		go(id){
+		go(id) {
 			uni.navigateTo({
 				url: `../components/goodDetail?id=${id}`
 			})
 		}
-	},
+	}
 }
 </script>
 
 <style lang="scss" scoped>
-.sunYuan{
-	background: #1BBB5A;
+.sunYuan {
+	background: #1bbb5a;
 	height: calc(100vh - 78px);
-	.search{
+	.search {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -54,13 +58,13 @@ export default {
 		margin: 0 70rpx;
 		padding: 16rpx;
 		border-radius: 100rpx;
-		image{
+		image {
 			width: 40rpx;
 			height: 40rpx;
 			margin: 0 10rpx 0 186rpx;
 		}
 	}
-	.commodity{
+	.commodity {
 		margin-top: 30rpx;
 		background: #f2f2f2;
 		border-top-left-radius: 40rpx;
@@ -68,48 +72,46 @@ export default {
 		padding: 50rpx 50rpx 0;
 		display: flex;
 		height: 100%;
-		.sort{
-			display: flex;
-			flex-direction: column;
-			position: relative;
-			width: 200rpx;
-			text{
-				margin-top: 10rpx;
-				font-size: 16px;
-				margin: 10rpx 0;
-				transition: all .3s;
-				&.selected{
-					color: #1BBB5A;
-				}
-			}
-		}
-		.show{
+		.show {
 			background: #fff;
-			width: 440rpx;
+			width: 100%;
 			border-top-left-radius: 30rpx;
 			border-top-right-radius: 30rpx;
 			padding: 0 20rpx;
-			.detail{
+			.detail {
 				border-bottom: 1px solid #ddd;
 				padding: 30rpx 15rpx 30rpx;
 				display: flex;
-				&:last-child{border: none;}
-				.img{
+				&:last-child {
+					border: none;
+				}
+				.img {
 					width: 120rpx;
 					height: 120rpx;
-					border: 1px solid #1BBB5A;
+					border: 1px solid #1bbb5a;
 					margin-right: 20rpx;
 				}
-				.info{
+				.info {
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
-					text{
-						&:first-child{
-							font-size: 17px;
+					flex: 1;
+					>view {
+						&:first-child {
+							view{
+								&:first-child{
+									font-size: 16px;
+								}
+								&:last-child{
+									color: #aaa;
+									font-size: 13px;
+								}
+							}
 						}
-						&:last-child{
-							color: red;
+						&:last-child {
+							display: flex;
+							justify-content: flex-end;
+							color: #f22f2f;
 						}
 					}
 				}

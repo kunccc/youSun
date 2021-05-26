@@ -91,7 +91,7 @@ export default {
 		padding: 30rpx;
 		padding-left: 23rpx;
 		background: #fff;
-		box-shadow: 0 -8rpx 8rpx 8rpx rgba(0, 0, 0, 0.03);
+		box-shadow: 0 -6rpx 6rpx 6rpx rgba(0, 0, 0, 0.01);
 		position: relative;
 		.price {
 			font-size: 22px;

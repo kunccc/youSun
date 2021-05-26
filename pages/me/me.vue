@@ -3,7 +3,7 @@
 		<view class="info">
 			<view class="head">
 				<view @click="login" class="img"><image :src="user.avatarUrl || '../../static/noLogin.png'" :class="{ isLoginIn: user.nickName }"></image></view>
-				<text v-if="!user.nickName" @click="login">未登录</text>
+				<text v-if="!user.nickName" @click="login ">未登录</text>
 				<text v-else>{{ user.nickName }}</text>
 			</view>
 			<view class="collection">
@@ -86,7 +86,7 @@ export default {
 			})
 		},
 		login() {
-			if (this.user) return
+			if (this.user.nickName) return
 			this.getInfo()
 				.then(res => {
 					uni.showLoading({

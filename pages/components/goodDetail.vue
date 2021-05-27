@@ -3,7 +3,7 @@
 		<view class="swiper" />
 		<view class="wrapper">
 			<view class="price">{{ goodDetail.price }}</view>
-			<view class="collect" :class="{ isCollected: goodDetail.isCollected }" @click="toggleIsCollected(goodDetail.id)">
+			<view class="collect" :class="{ isCollected: goodDetail.isCollected }" @click="collect(goodDetail.id)">
 				<image :src="goodDetail.isCollected ? '../../static/heart-active.png' : '../../static/heart.png'" />
 				<text>{{ goodDetail.isCollected ? '已收藏' : '收藏' }}</text>
 			</view>
@@ -23,9 +23,9 @@
 			<view class="comment" v-for="(item, index) in comments" :key="index">
 				<view class="header">
 					<view class="img"><image :src="item.imgUrl"></image></view>
-					<text class="name">{{item.name}}</text>
+					<text class="name">{{ item.name }}</text>
 				</view>
-				<view class="content">{{item.content}}</view>
+				<view class="content">{{ item.content }}</view>
 			</view>
 		</view>
 		<view class="desc">
@@ -42,6 +42,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import { friendlyDate } from './friendlyDate.js'
+import { checkLogin } from './checkLogin.js'
 
 export default {
 	data() {
@@ -50,29 +51,45 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['allGoods', 'cart', 'comments']),
+		...mapGetters(['allGoods', 'cart', 'comments', 'user']),
 		goodDetail() {
 			return this.allGoods.find(item => item.id === this.id)
 		}
 	},
 	methods: {
 		...mapMutations(['toggleIsCollected', 'addHistoryItem', 'addCartItem']),
+		collect(id) {
+			checkLogin().then(() => this.toggleIsCollected(id))
+		},
 		addToCart() {
-			for (let item of this.cart) {
-				if (item.id === this.id) {
-					uni.showToast({
-						title: '商品已在购物车中',
-						icon: 'none'
-					})
-					return
+			checkLogin().then(() => {
+				for (let item of this.cart) {
+					if (item.id === this.id) {
+						uni.showToast({
+							title: '商品已在购物车中',
+							icon: 'none'
+						})
+						return
+					}
 				}
-			}
-			this.addCartItem(this.id)
-			uni.showToast({
-				title: '添加购物车成功'
+				this.addCartItem(this.id)
+				uni.showToast({
+					title: '添加购物车成功'
+				})
 			})
 		},
 		go(value) {
+			if (value === 'confirmOrder') {
+				checkLogin().then(() => {
+					let id
+					const routes = getCurrentPages()
+					id = routes[routes.length - 1].options.id
+					uni.navigateTo({
+						url: `./confirmOrder?id=${id}`
+					})
+				})
+				return
+			}
 			uni.navigateTo({
 				url: `./${value}`
 			})
@@ -178,9 +195,9 @@ export default {
 				display: flex;
 				align-items: center;
 				image {
-						width: 20rpx;
-						height: 20rpx;
-						margin-left: 6rpx;
+					width: 20rpx;
+					height: 20rpx;
+					margin-left: 6rpx;
 				}
 			}
 		}

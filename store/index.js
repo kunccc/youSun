@@ -15,6 +15,7 @@ const store = new Vuex.Store({
 		cart: [],
 		collection: [],
 		history: [],
+		order: [],
 		allOrders: [
 			{ id: 1, orderId: 1, name: '酸笋', price: '￥10.8', status: '待发货', count: '1' },
 			{ id: 2, orderId: 2, name: '笋干', price: '￥16.8', status: '待收货', count: '3' },
@@ -53,6 +54,9 @@ const store = new Vuex.Store({
 			state.history.forEach(group => sum += group.items.length)
 			return sum
 		},
+		order(state){
+			return state.cart.filter(item => item.selected === true)
+		},
 		allOrders(state) {
 			return state.allOrders
 		},
@@ -65,9 +69,7 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		setUser(state, payload){
-			console.log(payload)
 			state.user = {...state.user, ...payload}
-			console.log(state.user)
 		},
 		toggleCartAll(state, value){
 			for (let item of state.cart) item.selected = value

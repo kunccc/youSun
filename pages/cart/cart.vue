@@ -35,6 +35,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import { checkLogin } from '../components/checkLogin.js'
 
 export default {
 	computed: {
@@ -84,17 +85,19 @@ export default {
 		},
 		go(id) {
 			if (id === 'cal') {
-				for(let item of this.cart){
-					if(item.selected){
-						uni.navigateTo({
-							url: '../components/confirmOrder'
-						})
-						return
+				checkLogin().then(() => {
+					for (let item of this.cart) {
+						if (item.selected) {
+							uni.navigateTo({
+								url: '../components/confirmOrder'
+							})
+							return
+						}
 					}
-				}
-				uni.showToast({
-					title: '您未选择商品',
-					icon: 'none'
+					uni.showToast({
+						title: '您未选择商品',
+						icon: 'none'
+					})
 				})
 				return
 			}
@@ -241,7 +244,7 @@ export default {
 		}
 	}
 	.total {
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 		left: 0;
 		display: flex;

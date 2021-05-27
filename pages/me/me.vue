@@ -59,6 +59,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import { checkLogin } from '../components/checkLogin.js'
 
 export default {
 	computed: {
@@ -67,13 +68,17 @@ export default {
 	methods: {
 		...mapMutations(['setUser']),
 		jump(value) {
-			uni.navigateTo({
-				url: `./components/allOrders?page=${value}`
+			checkLogin().then(() => {
+				uni.navigateTo({
+					url: `./components/allOrders?page=${value}`
+				})
 			})
 		},
 		go(value) {
-			uni.navigateTo({
-				url: `./components/${value}`
+			checkLogin().then(() => {
+				uni.navigateTo({
+					url: `./components/${value}`
+				})
 			})
 		},
 		getInfo() {
@@ -121,17 +126,19 @@ export default {
 			})
 		},
 		open() {
-			this.getAddress()
-				.then(res => {
-					const address = res.provinceName + res.cityName + res.countyName + res.detailInfo
-					const userName = res.userName
-					const telNumber = res.telNumber
-					uni.setStorageSync('address', address)
-					uni.setStorageSync('userName', userName)
-					uni.setStorageSync('telNumber', telNumber)
-					this.setUser({ address, userName, telNumber })
-				})
-				.catch(err => console.log(err))
+			checkLogin().then(() => {
+				this.getAddress()
+					.then(res => {
+						const address = res.provinceName + res.cityName + res.countyName + res.detailInfo
+						const userName = res.userName
+						const telNumber = res.telNumber
+						uni.setStorageSync('address', address)
+						uni.setStorageSync('userName', userName)
+						uni.setStorageSync('telNumber', telNumber)
+						this.setUser({ address, userName, telNumber })
+					})
+					.catch(err => console.log(err))
+			})
 		}
 	}
 }

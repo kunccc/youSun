@@ -6,16 +6,28 @@ export default {
 		...mapMutations(['setUser'])
 	},
 	onLaunch() {
-		let nickName, avatarUrl
+		let nickName, avatarUrl, address, userName, telNumber
 		uni.getStorage({
 			key: 'nickName',
 			success: res => nickName = res.data
 		})
 		uni.getStorage({
+			key: 'address',
+			success: res => address= res.data
+		})
+		uni.getStorage({
+			key: 'userName',
+			success: res => userName= res.data
+		})
+		uni.getStorage({
+			key: 'telNumber',
+			success: res => telNumber= res.data
+		})
+		uni.getStorage({
 			key: 'avatarUrl',
 			success: res => {
-				avatarUrl = res.data,
-				this.setUser({ nickName, avatarUrl })
+				avatarUrl = res.data
+				this.setUser({ nickName, avatarUrl, address, userName, telNumber })
 			}
 		})
 	},

@@ -64,8 +64,10 @@ const store = new Vuex.Store({
 		}
 	},
 	mutations: {
-		setUser(state, {nickName, avatarUrl}){
-			state.user = {nickName, avatarUrl}
+		setUser(state, payload){
+			console.log(payload)
+			state.user = {...state.user, ...payload}
+			console.log(state.user)
 		},
 		toggleCartAll(state, value){
 			for (let item of state.cart) item.selected = value

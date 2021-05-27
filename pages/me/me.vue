@@ -3,7 +3,7 @@
 		<view class="info">
 			<view class="head">
 				<view @click="login" class="img"><image :src="user.avatarUrl || '../../static/noLogin.png'" :class="{ isLoginIn: user.nickName }"></image></view>
-				<text v-if="!user.nickName" @click="login ">未登录</text>
+				<text v-if="!user.nickName" @click="login">未登录</text>
 				<text v-else>{{ user.nickName }}</text>
 			</view>
 			<view class="collection">
@@ -93,10 +93,10 @@ export default {
 						title: '登录中',
 						mask: true
 					})
-					uni.setStorageSync('nickName', res.nickName)
-					uni.setStorageSync('avatarUrl', res.avatarUrl)
 					const nickName = res.nickName
 					const avatarUrl = res.avatarUrl
+					uni.setStorageSync('nickName', nickName)
+					uni.setStorageSync('avatarUrl', avatarUrl)
 					setTimeout(() => {
 						this.setUser({ nickName, avatarUrl })
 						uni.hideLoading()
@@ -107,15 +107,31 @@ export default {
 				})
 				.catch(err => console.log(err))
 		},
-		open() {
-			uni.authorize({
-				scope: 'scope.address',
-				success() {
-					uni.chooseAddress({
-						success: res => console.log(res)
-					})
-				}
+		getAddress() {
+			return new Promise((resolve, reject) => {
+				uni.authorize({
+					scope: 'scope.address',
+					success() {
+						uni.chooseAddress({
+							success: res => resolve(res),
+							fail: err => reject(err)
+						})
+					}
+				})
 			})
+		},
+		open() {
+			this.getAddress()
+				.then(res => {
+					const address = res.provinceName + res.cityName + res.countyName + res.detailInfo
+					const userName = res.userName
+					const telNumber = res.telNumber
+					uni.setStorageSync('address', address)
+					uni.setStorageSync('userName', userName)
+					uni.setStorageSync('telNumber', telNumber)
+					this.setUser({ address, userName, telNumber })
+				})
+				.catch(err => console.log(err))
 		}
 	}
 }

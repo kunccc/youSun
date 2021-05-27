@@ -33,7 +33,7 @@
 				</view>
 				<view class="footer">
 					<view @click="go('transform')">查看物流</view>
-					<view @click="go('cart')">再次购买</view>
+					<view @click="go('confirmOrder')">再次购买</view>
 				</view>
 			</view>
 		</view>

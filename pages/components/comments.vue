@@ -61,7 +61,7 @@ export default {
 			color: #999;
 			transition: all 250ms;
 			&.selected {
-				color: #222;
+				color: #333;
 			}
 		}
 	}

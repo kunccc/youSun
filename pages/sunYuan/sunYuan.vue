@@ -69,7 +69,7 @@ export default {
 		background: #f2f2f2;
 		border-top-left-radius: 40rpx;
 		border-top-right-radius: 40rpx;
-		padding: 50rpx 50rpx 0;
+		padding: 40rpx 40rpx 0;
 		display: flex;
 		height: 100%;
 		.show {

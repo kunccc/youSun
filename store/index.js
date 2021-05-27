@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {createOrderId} from '../pages/components/createOrderId.js'
 
 Vue.use(Vuex)
 
@@ -17,8 +18,8 @@ const store = new Vuex.Store({
 		history: [],
 		order: [],
 		allOrders: [
-			{ id: 1, orderId: 1, name: '酸笋', price: '￥10.8', status: '待发货', count: '1' },
-			{ id: 2, orderId: 2, name: '笋干', price: '￥16.8', status: '待收货', count: '3' },
+			{ id: 1, orderId: createOrderId(), name: '酸笋', price: '￥10.8', status: '待发货', count: '1' },
+			{ id: 2, orderId: createOrderId(), name: '笋干', price: '￥16.8', status: '待收货', count: '3' },
 		],
 		coupon: [
 			{name: '无门槛通用券', effectiveDate: '2021.05.07~2021.05.31', value: 10, least: 99},
@@ -106,6 +107,11 @@ const store = new Vuex.Store({
 		},
 		deleteOrderItem(state, orderId){
 			state.allOrders = state.allOrders.filter(item => item.orderId !== orderId)
+		},
+		addOrderItem(state, payload){
+			for(let item of payload) {
+				state.allOrders.unshift({...item, orderId: createOrderId(), price: '￥' + item.price, status: '待发货'})
+			}
 		},
 		toggleIsCollected(state, id){
 			for(let item of state.allGoods) {

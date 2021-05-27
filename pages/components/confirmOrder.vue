@@ -8,15 +8,15 @@
 			<image @click="open" src="../../static/right.png" />
 		</view>
 		<view class="main">
-			<view v-if="good.id" class="goodInfo">
+			<view v-if="good[0].id" class="goodInfo">
 				<view class="img"></view>
 				<view class="detail">
-					<view class="name">{{ good.name }}</view>
+					<view class="name">{{ good[0].name }}</view>
 					<view class="wrapper">
-						<view class="price">￥{{ good.price }}</view>
+						<view class="price">￥{{ good[0].price }}</view>
 						<view class="picker">
-							<view class="minus" @click="minus(good)" :class="{ minimun: good.count === 1 }" />
-							<view class="count">{{ good.count }}</view>
+							<view class="minus" @click="minus(good)" :class="{ minimun: good[0].count === 1 }" />
+							<view class="count">{{ good[0].count }}</view>
 							<view class="plus" @click="plus(good)" />
 						</view>
 					</view>
@@ -50,7 +50,7 @@
 		</view>
 		<view class="bar">
 			<view class="total">￥{{ total }}</view>
-			<view class="action">提交订单</view>
+			<view class="action" @click="confirm">提交订单</view>
 		</view>
 	</view>
 </template>
@@ -61,14 +61,14 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
 	data() {
 		return {
-			good: {}
+			good: []
 		}
 	},
 	computed: {
 		...mapGetters(['user', 'order', 'allGoods']),
 		total() {
 			let sum = 0
-			if (this.good.id) sum = this.good.price * this.good.count
+			if (this.good[0]) sum = this.good[0].price * this.good[0].count
 			else this.order.forEach(item => sum += item.price * item.count)
 			const index = sum.toString().indexOf('.')
 			if (index < 0) return sum.toString() + '.0'
@@ -82,11 +82,11 @@ export default {
 		id = routes[routes.length - 1].options.id
 		if (id) {
 			const fakeGood = this.allGoods.find(item => item.id === parseInt(id))
-			this.good = { id, name: fakeGood.name, price: fakeGood.price.slice(1, 5), count: 1 }
+			this.good.push({ id, name: fakeGood.name, price: fakeGood.price.slice(1, 5), count: 1 })
 		}
 	},
 	methods: {
-		...mapMutations(['setUser']),
+		...mapMutations(['setUser', 'addOrderItem']),
 		minus(item) {
 			if (item.count === 1) return
 			item.count -= 1
@@ -119,6 +119,22 @@ export default {
 					this.setUser({ address, userName, telNumber })
 				})
 				.catch(err => console.log(err))
+		},
+		confirm() {
+			uni.showToast({
+				title: '正在提交订单',
+				icon: 'loading'
+			})
+			setTimeout(() => {
+				if(this.good[0]) this.addOrderItem(this.good)
+				else this.addOrderItem(this.order)
+				uni.showToast({
+					title: '提交订单成功',
+				})
+			}, 1500)
+			setTimeout(() => {
+				uni.navigateBack()
+			}, 3000)
 		}
 	}
 }

@@ -33,7 +33,7 @@
 				</view>
 				<view class="footer">
 					<view @click="go('transform')">查看物流</view>
-					<view @click="go('confirmOrder')">再次购买</view>
+					<view @click="go('confirmOrder', item.id)">再次购买</view>
 				</view>
 			</view>
 		</view>
@@ -77,6 +77,12 @@ export default {
 			if (value === 'goodDetail') {
 				uni.navigateTo({
 					url: `../../components/goodDetail?id=${id}`
+				})
+				return
+			}
+			if (value === 'confirmOrder') {
+				uni.navigateTo({
+					url: `../../components/confirmOrder?id=${id}`
 				})
 				return
 			}

@@ -109,9 +109,11 @@ const store = new Vuex.Store({
 			state.allOrders = state.allOrders.filter(item => item.orderId !== orderId)
 		},
 		addOrderItem(state, payload){
-			for(let item of payload) {
-				state.allOrders.unshift({...item, orderId: createOrderId(), price: '￥' + item.price, status: '待发货'})
-			}
+			if(payload instanceof Array) {
+				for(let item of payload) {
+					state.allOrders.unshift({...item, orderId: createOrderId(), price: '￥' + item.price, status: '待发货'})
+				}
+			} else state.allOrders.unshift({...payload, orderId: createOrderId(), price: '￥' + payload.price, status: '待发货'})
 		},
 		toggleIsCollected(state, id){
 			for(let item of state.allGoods) {

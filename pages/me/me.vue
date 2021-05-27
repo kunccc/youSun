@@ -189,9 +189,11 @@ export default {
 				> view {
 					display: flex;
 					align-items: center;
+					color: #999;
 					image {
-						width: 30rpx;
-						height: 30rpx;
+						width: 20rpx;
+						height: 20rpx;
+						margin-left: 6rpx;
 					}
 				}
 			}

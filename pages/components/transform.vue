@@ -1,9 +1,24 @@
 <template>
-	<view>查看物流</view>
+	<view class="transform">
+		<image src="../../static/transform.png" />
+		暂无物流信息
+	</view>
 </template>
 
-<script>
-</script>
+<script></script>
 
-<style>
+<style lang="scss" scoped>
+.transform {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 150rpx;
+	color: #aaa;
+	image {
+		width: 200rpx;
+		height: 200rpx;
+		margin-bottom: 30rpx;
+	}
+}
 </style>

@@ -59,6 +59,11 @@
 		"style":{
 			"navigationBarTitleText": "确认订单"
 		}
+	}, {
+		"path": "pages/components/comments",
+		"style":{
+			"navigationBarTitleText": "评价"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",

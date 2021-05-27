@@ -3,18 +3,30 @@
 		<view class="swiper" />
 		<view class="wrapper">
 			<view class="price">{{ goodDetail.price }}</view>
-			<view class="collect" :class="{ 'isCollected': goodDetail.isCollected }" @click="toggleIsCollected(goodDetail.id)">
+			<view class="collect" :class="{ isCollected: goodDetail.isCollected }" @click="toggleIsCollected(goodDetail.id)">
 				<image :src="goodDetail.isCollected ? '../../static/heart-active.png' : '../../static/heart.png'" />
 				<text>{{ goodDetail.isCollected ? '已收藏' : '收藏' }}</text>
 			</view>
 		</view>
 		<view class="info">
 			<view class="name">{{ goodDetail.name }}</view>
-			<view class="slogan">{{'"' + goodDetail.slogan + '"'}}</view>
+			<view class="slogan">{{ '"' + goodDetail.slogan + '"' }}</view>
 		</view>
 		<view class="comments">
-			<text class="title">评价</text>
-			<view class="comment">不错不错</view>
+			<view class="title">
+				<view>评价</view>
+				<view class="action" @click="go('comments')">
+					查看全部
+					<image src="../../static/right.png"></image>
+				</view>
+			</view>
+			<view class="comment" v-for="(item, index) in comments" :key="index">
+				<view class="header">
+					<view class="img"><image :src="item.imgUrl"></image></view>
+					<text class="name">{{item.name}}</text>
+				</view>
+				<view class="content">{{item.content}}</view>
+			</view>
 		</view>
 		<view class="desc">
 			<text class="title">商品详情</text>
@@ -22,14 +34,14 @@
 		</view>
 		<view class="bar">
 			<view class="addToCart" @click="addToCart">加入购物车</view>
-			<view class="buyNow" @click="go">立即购买</view>
+			<view class="buyNow" @click="go('confirmOrder')">立即购买</view>
 		</view>
 	</view>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import {friendlyDate} from './friendlyDate.js' 
+import { friendlyDate } from './friendlyDate.js'
 
 export default {
 	data() {
@@ -38,31 +50,31 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['allGoods', 'cart']),
+		...mapGetters(['allGoods', 'cart', 'comments']),
 		goodDetail() {
 			return this.allGoods.find(item => item.id === this.id)
 		}
 	},
 	methods: {
 		...mapMutations(['toggleIsCollected', 'addHistoryItem', 'addCartItem']),
-		addToCart(){
-			for(let item of this.cart){
-				if(item.id === this.id) {
+		addToCart() {
+			for (let item of this.cart) {
+				if (item.id === this.id) {
 					uni.showToast({
-					    title: '已在购物车中',
-							icon: 'none'
+						title: '商品已在购物车中',
+						icon: 'none'
 					})
 					return
 				}
 			}
 			this.addCartItem(this.id)
 			uni.showToast({
-			    title: '添加购物车成功'
-			});
+				title: '添加购物车成功'
+			})
 		},
-		go(){
+		go(value) {
 			uni.navigateTo({
-				url: './confirmOrder'
+				url: `./${value}`
 			})
 		}
 	},
@@ -72,7 +84,7 @@ export default {
 		const date = friendlyDate(new Date())
 		const id = this.id
 		const price = this.allGoods.find(item => item.id === this.id).price
-		this.addHistoryItem({date, id, price})
+		this.addHistoryItem({ date, id, price })
 	}
 }
 </script>
@@ -80,6 +92,8 @@ export default {
 <style lang="scss" scoped>
 .goodDetail {
 	position: relative;
+	height: calc(100vh - 44px);
+	overflow: auto;
 	.swiper {
 		height: 500rpx;
 		background: #fff;
@@ -152,18 +166,53 @@ export default {
 		border-radius: 20rpx;
 		padding: 30rpx;
 		margin-bottom: 25rpx;
-		.title {
+		> .title {
 			font-size: 18px;
+			margin-bottom: 20rpx;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.action {
+				font-size: 14px;
+				color: #999;
+				display: flex;
+				align-items: center;
+				image {
+						width: 20rpx;
+						height: 20rpx;
+						margin-left: 6rpx;
+				}
+			}
 		}
 		.comment {
-			padding: 40rpx 0 30rpx;
+			padding: 25rpx 0;
+			border-bottom: 1px solid #ddd;
+			&:last-child {
+				border: none;
+			}
+			.header {
+				display: flex;
+				align-items: flex-end;
+				margin-bottom: 30rpx;
+				.img {
+					width: 50rpx;
+					height: 50rpx;
+					border-radius: 50%;
+					margin-right: 20rpx;
+					overflow: hidden;
+					image {
+						width: 50rpx;
+						height: 50rpx;
+					}
+				}
+			}
 		}
 	}
 	.desc {
 		background: #fff;
 		padding: 30rpx;
 		border-radius: 20rpx;
-		.title {
+		> .title {
 			font-size: 18px;
 		}
 		.detail {

@@ -22,8 +22,12 @@ const store = new Vuex.Store({
 			{ id: 4, orderId: 4, name: '高级定制竹笋', price: '', status: '已完成', count: '2' }
 		],
 		coupon: [
-			{name: '无门槛通用券', effectiveDate: '2021.05.07-2021.05.31', value: 10, least: 99},
-			{name: '无门槛通用券', effectiveDate: '2021.05.07-2021.05.31', value: 20, least: 199}
+			{name: '无门槛通用券', effectiveDate: '2021.05.07~2021.05.31', value: 10, least: 99},
+			{name: '无门槛通用券', effectiveDate: '2021.05.07~2021.05.31', value: 20, least: 199}
+		],
+		comments: [
+			{imgUrl: '../../static/user1.png', name: 'Hee', content: '太好吃辣，买买买！', date: '2021-05-27'},
+			{imgUrl: '../../static/user2.png', name: 'Homo', content: '还不错哦。', date: '2021-05-26'}
 		]
 	},
 	getters: {
@@ -57,6 +61,9 @@ const store = new Vuex.Store({
 		coupon(state) {
 			return state.coupon
 		},
+		comments(state) {
+			return state.comments
+		}
 	},
 	mutations: {
 		setUser(state, {nickName, avatarUrl}){

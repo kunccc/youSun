@@ -81,10 +81,8 @@ export default {
 		const routes = getCurrentPages()
 		id = routes[routes.length - 1].options.id
 		if (id) {
-			console.log(id)
 			const fakeGood = this.allGoods.find(item => item.id === parseInt(id))
 			this.good = { id, name: fakeGood.name, price: fakeGood.price.slice(1, 5), count: 1 }
-			console.log(this.good)
 		}
 	},
 	methods: {
@@ -123,15 +121,24 @@ export default {
 				.catch(err => console.log(err))
 		},
 		confirm() {
+			if(!this.user.address){
+				uni.showToast({
+					title: '您未选择地址',
+					icon: 'none'
+				})
+				return
+			}
 			uni.showToast({
 				title: '正在提交订单',
-				icon: 'loading'
+				icon: 'loading',
+				mask: 'true'
 			})
 			setTimeout(() => {
 				if(this.good.id) this.addOrderItem(this.good)
 				else this.addOrderItem(this.order)
 				uni.showToast({
 					title: '提交订单成功',
+					mask: 'true'
 				})
 			}, 1500)
 			setTimeout(() => {
@@ -160,6 +167,10 @@ export default {
 				font-size: 16px;
 				color: #111;
 				margin-bottom: 6px;
+				max-width: 600rpx;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 		}
 		image {

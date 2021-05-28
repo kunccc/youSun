@@ -49,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 .sunYuan {
 	background: #1bbb5a;
-	height: calc(100vh - 78px);
+	height: calc(100vh - 68px);
 	.search {
 		display: flex;
 		justify-content: center;
@@ -79,7 +79,7 @@ export default {
 			border-top-right-radius: 30rpx;
 			padding: 0 20rpx;
 			.detail {
-				border-bottom: 1px solid #ddd;
+				border-bottom: 1px solid #eee;
 				padding: 30rpx 15rpx 30rpx;
 				display: flex;
 				&:last-child {

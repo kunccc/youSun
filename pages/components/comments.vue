@@ -49,9 +49,10 @@ export default {
 <style lang="scss" scoped>
 .comments {
 	background: #fff;
-	padding: 30rpx;
-	min-height: calc(100vh - 44px);
+	padding: 30rpx 30rpx 40rpx;
 	position: relative;
+	border-bottom-left-radius: 20rpx;
+	border-bottom-right-radius: 20rpx;
 	.title {
 		display: flex;
 		justify-content: flex-end;
@@ -98,7 +99,7 @@ export default {
 		padding: 18rpx 40rpx 18rpx 45rpx;
 		border-radius: 50rpx;
 		color: #fff;
-		position: absolute;
+		position: fixed;
 		bottom: 12%;
 		left: 50%;
 		transform: translateX(-50%);

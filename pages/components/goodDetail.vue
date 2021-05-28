@@ -203,7 +203,7 @@ export default {
 		}
 		.comment {
 			padding: 25rpx 0;
-			border-bottom: 1px solid #ddd;
+			border-bottom: 1px solid #eee;
 			&:last-child {
 				border: none;
 			}
